@@ -33,7 +33,7 @@ async function lista(){const g=M.grupos.find(g=>String(g.ano)===sa.value&&g.uf==
  if(!cache[k]){try{await load(root+'data/idx/'+k+'.js');cache[k]=(window.__IDX||{})[k]||[]}catch(_){cache[k]=[]}}
  const t=norm(q.value.trim());let rows=cache[k].filter(r=>!t||norm(r[1]).includes(t)||String(r[0]).startsWith(t));
  info.textContent=rows.length+' candidato(s) com análise gerada';
- rows.slice(0,60).forEach(r=>{const li=mk('li'),a=mk('a',null,r[1]);a.href=root+g.ano+'/'+g.uf.toLowerCase()+'/'+g.cargo+'/'+r[0]+'/'+(location.protocol==='file:'?'index.html':'');
+ rows.slice(0,100).forEach(r=>{const li=mk('li'),a=mk('a',null,r[1]);a.href=root+g.ano+'/'+g.uf.toLowerCase()+'/'+g.cargo+'/'+r[0]+'/'+(location.protocol==='file:'?'index.html':'');
   if(g.ano===cur.ano&&g.uf===cur.uf&&g.cargo===cur.cargo&&r[0]===cur.numero){a.setAttribute('aria-current','page')}
   li.append(a,mk('span',null,'nº '+r[0]+' · '+r[2].toLocaleString('pt-BR')+' votos'));ul.appendChild(li)})}
 let fi=false;async function abrir(){if(!M){try{await load(root+'data/manifest.js');M=window.__MAN}catch(_){info.textContent='Não consegui carregar a lista de candidatos.';return}}if(!fi){filtros(true);fi=true}lista()}

@@ -146,8 +146,8 @@ O CSV de `baixar_rs_completo.py` traz todos os cargos. Com ele:
 
 roda a análise completa dos mais votados de cada cargo e junta tudo em `site/`, onde o botão
 "Trocar candidato" do topo de cada página alterna entre cargo e candidato. Quem já está no site é pulado
-(use `--refazer` para recalcular). Em `config.json`, `"lote": {"1": 99, "3": 99, "5": 99, "6": 40, "7": 40}`
-define quantos candidatos por cargo (código do cargo: 1 presidente, 3 governador, 5 senador, 6 deputado
+(use `--refazer` para recalcular). Em `config.json`, `"lote": {"3": 99999, "5": 99999, "6": 99999, "7": 99999}`
+define quantos candidatos por cargo (código do cargo: 3 governador, 5 senador, 6 deputado
 federal, 7 deputado estadual) e `"permutacoes_lote"` (padrão 199) controla as permutações dos testes.
 A primeira leitura do CSV de cada cargo é a parte lenta e fica em cache em `dados/.cache`.
 Para os nomes dos candidatos de cada cargo, rode antes o `baixar_rs_completo.py` (baixa as listas).

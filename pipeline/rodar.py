@@ -141,7 +141,7 @@ def main():
     return run_analysis.main(c["montar_args"](cfg.get("cargo", 7), cfg["numero"], cfg.get("nome")))
 
 
-LOTE_PADRAO = {"1": 99, "3": 99, "5": 99, "6": 40, "7": 40}  # quantos candidatos mais votados por cargo
+LOTE_PADRAO = {"3": 99999, "5": 99999, "6": 99999, "7": 99999}  # quantos candidatos mais votados por cargo (todos)
 
 
 def rodar_lote(cfg, ano, ufs, multi, cfg_path, saida, site_dir, so_destaques=False, refazer=False):

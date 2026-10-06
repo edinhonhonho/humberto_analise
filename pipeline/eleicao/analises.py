@@ -117,10 +117,7 @@ def modelo(g: pd.DataFrame, gm, fed: pd.DataFrame, permutacoes: int = 199) -> tu
     d = g[["CD_MUNICIPIO", "votos", "validos", "eleitores", "abstencao_pct", "pct_validos"]].merge(
         fed[["CD_MUNICIPIO", "fed_outros_pct"]], on="CD_MUNICIPIO")
     gp = gm.to_crs(spatial.utm_crs(gm)).reset_index(drop=True)
-    w = weights.Queen.from_dataframe(gp, use_index=False)
-    if w.islands:
-        w = weights.KNN.from_dataframe(gp, k=5)
-    w.transform = "r"
+    w = spatial.pesos_municipios(gp)
     ord_ = _alinhar(gm, d, d["fed_outros_pct"].to_numpy(float))
     viz_gm = weights.lag_spatial(w, ord_)
     viz = pd.Series(viz_gm, index=gm["CD_MUNICIPIO"].fillna(-1).astype(int).to_numpy())
@@ -128,7 +125,8 @@ def modelo(g: pd.DataFrame, gm, fed: pd.DataFrame, permutacoes: int = 199) -> tu
     d["fed_viz_pct"] = d["CD_MUNICIPIO"].map(viz).fillna(0.0)
     d["ln_eleitores"] = np.log(d["eleitores"].clip(lower=1))
     d["abstencao_pct"] = d["abstencao_pct"].fillna(d["abstencao_pct"].median())
-    cols = ["ln_eleitores", "abstencao_pct", "fed_outros_pct", "fed_viz_pct"]
+    cols = [c for c in ["ln_eleitores", "abstencao_pct", "fed_outros_pct", "fed_viz_pct"]
+            if float(np.nanstd(d[c].to_numpy(float))) > 1e-9]  # coluna constante deixa a matriz singular
     rot = {"const": "Constante", "ln_eleitores": "Tamanho do eleitorado (logaritmo)", "abstencao_pct": "Abstenção (%)",
            "fed_outros_pct": "Votos do resto da federação no município (%)",
            "fed_viz_pct": "Votos do resto da federação nos vizinhos (%)"}
@@ -218,7 +216,12 @@ def rodar_todas(cand, g, gm, numero, comp, partidos, permutacoes=199) -> dict:
         coef, mod_meta = None, {}
         mod_mun = pd.DataFrame({"CD_MUNICIPIO": g["CD_MUNICIPIO"].to_numpy()})
     else:
-        coef, mod_mun, mod_meta = modelo(g, gm, fed, permutacoes)
+        try:
+            coef, mod_mun, mod_meta = modelo(g, gm, fed, permutacoes)
+        except np.linalg.LinAlgError:  # candidato com votos em poucos municípios: o modelo não se estima
+            fed_meta["sem_colegas"] = True
+            coef, mod_meta = None, {}
+            mod_mun = pd.DataFrame({"CD_MUNICIPIO": g["CD_MUNICIPIO"].to_numpy()})
     dist_mun, bandas, dist_meta = distancia(g, gm)
     mun = fed.merge(mod_mun, on="CD_MUNICIPIO", how="left").merge(dist_mun, on="CD_MUNICIPIO", how="left")
     return {"mun": mun, "sobreposicao": sob, "modelo": coef, "bandas": bandas,

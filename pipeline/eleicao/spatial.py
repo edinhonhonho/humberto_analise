@@ -21,6 +21,24 @@ def utm_crs(gdf: gpd.GeoDataFrame):
 
 
 # --------------------------------------------------------------------------- 3. Moran / LISA
+_PESOS: dict = {}
+
+
+def pesos_municipios(gp):
+    """Vizinhança Queen (KNN 5 se houver ilhas), linha-padronizada. A construção é lenta e depende só da
+    geometria, então os vizinhos ficam em cache; cada chamada recebe um objeto novo."""
+    from libpysal import weights
+    key = (len(gp), hash(gp.geometry.bounds.round(3).to_numpy().tobytes()))
+    if key not in _PESOS:
+        w = weights.Queen.from_dataframe(gp, use_index=False)
+        if w.islands:
+            w = weights.KNN.from_dataframe(gp, k=5)
+        _PESOS[key] = {k: list(v) for k, v in w.neighbors.items()}
+    w = weights.W({k: list(v) for k, v in _PESOS[key].items()})
+    w.transform = "r"
+    return w
+
+
 def lisa_municipal(mun: gpd.GeoDataFrame, col: str, permutacoes: int = 999, seed: int = 42):
     """Moran global e local (LISA) de `col` entre municípios vizinhos (Queen)."""
     from esda import Moran, Moran_Local
@@ -28,10 +46,7 @@ def lisa_municipal(mun: gpd.GeoDataFrame, col: str, permutacoes: int = 999, seed
 
     gp = mun.to_crs(utm_crs(mun)).reset_index(drop=True)
     y = gp[col].astype(float).fillna(0).to_numpy()
-    w = weights.Queen.from_dataframe(gp, use_index=False)
-    if w.islands:
-        w = weights.KNN.from_dataframe(gp, k=5)
-    w.transform = "r"
+    w = pesos_municipios(gp)
     if np.allclose(y, y[0]):
         return (mun.assign(lisa_cluster="Não significativo", lisa_detalhe="", lisa_p=np.nan),
                 {"I": np.nan, "p": np.nan})
@@ -200,10 +215,7 @@ def moran_varios(mun: gpd.GeoDataFrame, series: dict, permutacoes: int = 199, se
     from libpysal import weights
 
     gp = mun.to_crs(utm_crs(mun)).reset_index(drop=True)
-    w = weights.Queen.from_dataframe(gp, use_index=False)
-    if w.islands:
-        w = weights.KNN.from_dataframe(gp, k=5)
-    w.transform = "r"
+    w = pesos_municipios(gp)
     out = {}
     for k, y in series.items():
         y = np.asarray(y, dtype=float)
@@ -223,10 +235,7 @@ def moran_bivariado(mun: gpd.GeoDataFrame, x, ys: dict, permutacoes: int = 199, 
     from libpysal import weights
 
     gp = mun.to_crs(utm_crs(mun)).reset_index(drop=True)
-    w = weights.Queen.from_dataframe(gp, use_index=False)
-    if w.islands:
-        w = weights.KNN.from_dataframe(gp, k=5)
-    w.transform = "r"
+    w = pesos_municipios(gp)
     x = np.asarray(x, dtype=float)
     out = {}
     for k, y in ys.items():

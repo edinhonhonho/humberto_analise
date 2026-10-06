@@ -210,6 +210,16 @@ def cards_html(destaques: list[dict], prefixo: str = "") -> str:
 
 def _landing(raiz: Path, man: dict, a: dict, icon: str, fav: str) -> None:
     gs = man["grupos"]
+    padrao = next((d for d in man.get("destaques", []) if d["ok"]), None)
+    if padrao:  # a entrada do site é a análise do primeiro candidato em destaque; o resto fica no topo da página
+        alvo = f'{padrao["ano"]}/{padrao["uf"].lower()}/{padrao["cargo"]}/{padrao["numero"]}/index.html'
+        (raiz / "index.html").write_text(
+            '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">'
+            f'<meta http-equiv="refresh" content="0;url={alvo}"><title>Análise eleitoral</title>'
+            '</head><body><p><a href="{alvo}">Abrir a análise de '
+            f'{html.escape(padrao["nome"])}</a></p><script>location.replace({json.dumps(alvo)})</script></body></html>',
+            encoding="utf-8")
+        return
     if len(gs) == 1 and gs[0]["n"] == 1 and not man.get("destaques"):
         ph = [r for r in [_ler_json(raiz / "data" / "idx" / f'{gs[0]["ano"]}_{gs[0]["uf"]}_{gs[0]["cargo"]}.json', [])]][0]
         alvo = f'{gs[0]["ano"]}/{gs[0]["uf"].lower()}/{gs[0]["cargo"]}/{ph[0][0]}/'
