@@ -244,3 +244,16 @@ a.dcard:hover{transform:translateY(-3px);border-color:var(--red)}
 @media (max-width:600px){nav.top .brand{font-size:0;gap:0}nav.top .brand i{font-size:initial}nav.top a[href="#guia"]{display:none}
 nav.top .in{padding:10px 14px}nav.top button.swbtn{margin-left:4px}}
 .swl span.gera{color:var(--red)}.dcard.off img{filter:grayscale(.6)}
+
+/* v12: cabeçalho e painel de troca */
+.dest{margin:22px 0 0;grid-template-columns:repeat(3,minmax(0,190px))}
+.dest+header.hd{padding-top:30px}
+.dest+header.hd::before{top:-260px}
+.dest+header.hd .mark{display:none}
+.swp{max-height:calc(100vh - 70px);overflow:auto}
+.swt{margin:0 0 4px;font-size:20px;letter-spacing:-.01em}
+.swa{margin:0 0 14px;color:var(--ink2);font-size:14px;max-width:70ch;padding:9px 12px;border-left:3px solid var(--red);background:var(--surface);border-radius:0 10px 10px 0}
+.swf{grid-template-columns:150px 230px minmax(0,1fr)}
+.swchk{display:flex;align-items:center;gap:6px;margin:10px 0 2px;font-size:13.5px;color:var(--ink2);cursor:pointer}
+.swl{margin-top:6px}.swl .nm.off{color:var(--muted);font-weight:500}.swl li.vazio{color:var(--muted);display:block}
+@media (max-width:700px){.swf{grid-template-columns:1fr 1fr}.swf label:last-child{grid-column:1/-1}.dest{grid-template-columns:repeat(3,minmax(0,1fr))}}
