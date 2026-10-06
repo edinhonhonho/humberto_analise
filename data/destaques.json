@@ -25,5 +25,14 @@
   "cargo": 6,
   "numero": 6577,
   "foto": "fotos/elias-jabbour.webp"
+ },
+ {
+  "slug": "fernanda-melchionna",
+  "nome": "Fernanda Melchionna",
+  "ano": 2026,
+  "uf": "RS",
+  "cargo": 6,
+  "numero": 5050,
+  "foto": "fotos/fernanda-melchionna.webp"
  }
 ]

@@ -391,3 +391,7 @@ button.dcard.mais:hover{border-color:var(--red);transform:translateY(-3px)}
 .dcard.mais .num{font-size:40px;font-weight:700;letter-spacing:-.04em;line-height:1;color:var(--red);font-variant-numeric:tabular-nums}
 .dcard.mais .cap{font-size:12px;font-weight:600;color:var(--ink2);margin-top:-4px}
 @media (max-width:600px){.dcard.mais .plus{width:20px;height:20px}.dcard.mais .num{font-size:24px}.dcard.mais .cap{font-size:9.5px;text-align:center;line-height:1.15;padding:0 3px}}
+
+/* v22: cinco cards */
+.dest{grid-template-columns:repeat(5,minmax(0,200px));gap:14px}
+@media (max-width:600px){.dest{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;row-gap:34px}}

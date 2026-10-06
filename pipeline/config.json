@@ -1,54 +1,66 @@
 {
-  "ano": 2026,
-  "uf": "RS",
-  "cargo": 7,
-  "turno": 1,
-  "numero": 65065,
-  "pasta_dados": "dados",
-  "saida": "saida_{ano}",
-  "top_cidades": 10,
-  "cidades": "",
-  "h3_res": "auto",
-  "permutacoes": 999,
-  "png": false,
-  "hex": false,
-  "nome": "Humberto Matos",
-  "ufs": [
-    "RS",
-    "RJ",
-    "PE"
-  ],
-  "destaques": [
-    {
-      "nome": "Humberto Matos",
-      "uf": "RS",
-      "cargo": 7,
-      "numero": 65065,
-      "foto": "fotos/humberto.webp"
-    },
-    {
-      "nome": "Jones Manoel",
-      "uf": "PE",
-      "cargo": 6,
-      "numero": 5050,
-      "foto": "fotos/jones.webp"
-    },
-    {
-      "nome": "Elias Jabbour",
-      "uf": "RJ",
-      "cargo": 6,
-      "numero": 6577,
-      "foto": "fotos/elias.webp"
-    }
-  ],
-  "lote": {
-    "3": 99999,
-    "5": 99999,
-    "6": 99999,
-    "7": 99999
+ "ano": 2026,
+ "uf": "RS",
+ "cargo": 7,
+ "turno": 1,
+ "numero": 65065,
+ "pasta_dados": "dados",
+ "saida": "saida_{ano}",
+ "top_cidades": 10,
+ "cidades": "",
+ "h3_res": "auto",
+ "permutacoes": 999,
+ "png": false,
+ "hex": false,
+ "nome": "Humberto Matos",
+ "ufs": [
+  "RS",
+  "RJ",
+  "PE"
+ ],
+ "destaques": [
+  {
+   "nome": "Humberto Matos",
+   "uf": "RS",
+   "cargo": 7,
+   "numero": 65065,
+   "foto": "fotos/humberto.webp"
   },
-  "espectros": ["esquerda"],
-  "votos_minimos": {"6": 500, "7": 500},
-  "permutacoes_lote": 99,
-  "top_cidades_lote": 3
+  {
+   "nome": "Jones Manoel",
+   "uf": "PE",
+   "cargo": 6,
+   "numero": 5050,
+   "foto": "fotos/jones.webp"
+  },
+  {
+   "nome": "Elias Jabbour",
+   "uf": "RJ",
+   "cargo": 6,
+   "numero": 6577,
+   "foto": "fotos/elias.webp"
+  },
+  {
+   "nome": "Fernanda Melchionna",
+   "uf": "RS",
+   "cargo": 6,
+   "numero": 5050,
+   "foto": "fotos/melchionna.webp"
+  }
+ ],
+ "lote": {
+  "3": 99999,
+  "5": 99999,
+  "6": 99999,
+  "7": 99999
+ },
+ "espectros": [
+  "esquerda"
+ ],
+ "votos_minimos": {
+  "6": 500,
+  "7": 500
+ },
+ "permutacoes_lote": 99,
+ "top_cidades_lote": 3
 }
