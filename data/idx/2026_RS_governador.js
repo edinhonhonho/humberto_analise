@@ -1,1 +1,1 @@
-(window.__IDX=window.__IDX||{})["2026_RS_governador"]=[[22,"Zucco",3516048,0],[12,"Juliana Brizola",1917374,1],[15,"Gabriel Souza",510698,0],[45,"Marcelo Maranata",101978,1],[80,"Priscila Voigt",5716,1],[16,"Rejane de Oliveira",3492,1],[29,"Cesar Pontes",2137,1]];
+(window.__IDX=window.__IDX||{})["2026_RS_governador"]=[[22,"Zucco",3516048,1],[12,"Juliana Brizola",1917374,1],[15,"Gabriel Souza",510698,1],[45,"Marcelo Maranata",101978,1],[80,"Priscila Voigt",5716,1],[16,"Rejane de Oliveira",3492,1],[29,"Cesar Pontes",2137,1]];

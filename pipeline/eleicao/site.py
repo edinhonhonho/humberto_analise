@@ -351,7 +351,7 @@ def _entrada(raiz: Path, man: dict, a: dict, icon: str, fav: str) -> None:
     pad = json.dumps(chave_pagina(padrao["ano"], padrao["uf"], padrao["cargo"], padrao["numero"])) if padrao else "null"
     css = f'<link rel="stylesheet" href="assets/{a["app.css"]}">'
     (raiz / "index.html").write_text(
-        _head("Análise eleitoral", css, fav) +
+        _head("Eleições", css, fav) +
         f'<body data-shell="1" data-root="" data-padrao=\'{pad}\'>{_NOSCRIPT}{report.NAV}'
         f'<div id="dest-slot"></div><main id="app"><p class="carregando">Carregando a análise…</p></main>'
         f'<template id="foot">{_rodape(icon)}</template>'

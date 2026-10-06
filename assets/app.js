@@ -148,7 +148,7 @@ function desenhar(P,geoSvg){
  (P.b||[]).forEach((b,i)=>{const el=app.querySelector('.blk[data-b="'+i+'"]');if(!el)return;
   if(b.t==='map'){BM[b.id]=b;TIPS[b.id]=b;const t=document.createElement('template');t.innerHTML=mapHtml(b);el.replaceWith(t.content)}
   else{const t=document.createElement('template');t.innerHTML=tabHtml(b);el.replaceWith(t.content)}});
- document.title=P.t;
+ document.title=SHELL?'Eleições':P.t;
  {const f=document.getElementById('foot');if(f)app.appendChild(f.content.cloneNode(true))}
  iniciar();
  if(location.hash==='#guia')abreGuia();

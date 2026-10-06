@@ -248,7 +248,7 @@ def map_card(uid: str, polys: list[dict], metrics: list[dict], proj: Proj, point
 
 
 # ------------------------------------------------------------------ barras horizontais
-def bar_chart(rows: list[dict], aria: str, unit: str = "", width: float = 760) -> str:
+def _bar_svg(rows: list[dict], aria: str, unit: str = "", width: float = 760) -> str:
     """rows: [{label, value, tip: [titulo, [[rotulo, valor]...]], fmt}] já ordenadas."""
     if not rows:
         return ""
@@ -276,9 +276,26 @@ def bar_chart(rows: list[dict], aria: str, unit: str = "", width: float = 760) -
     return "".join(out)
 
 
+def bar_chart(rows: list[dict], aria: str, unit: str = "", width: float = 760) -> str:
+    """Barras horizontais: SVG no computador e lista com barras em HTML no celular (texto legível)."""
+    svg = _bar_svg(rows, aria, unit, width)
+    if not svg:
+        return ""
+    vmax = max(r["value"] for r in rows) or 1
+    itens = "".join(
+        f'<li class="{"hl" if r.get("hl") else ""}" data-tip="{esc(json.dumps(r["tip"], ensure_ascii=False))}">'
+        f'<span class="hn">{esc(r["label"])}</span><b class="hv">{esc(r["fmt"])}{esc(unit)}</b>'
+        f'<i class="hb"><u style="width:{max(1.5, 100 * r["value"] / vmax):.1f}%"></u></i></li>' for r in rows)
+    return f'<div class="barwrap">{svg}<ul class="hbars" aria-label="{esc(aria)}">{itens}</ul></div>'
+
+
 # ------------------------------------------------------------------ Pareto (linha com crosshair)
-def pareto_chart(series: list[list], marcos: list[dict], xmax: int, width: float = 760,
-                 height: float = 300) -> str:
+def pareto_chart(series: list[list], marcos: list[dict], xmax: int) -> str:
+    """Duas versões da curva: larga (computador) e estreita (celular), alternadas por CSS."""
+    return (_pareto(series, marcos, xmax, 760, 300, "vd") + _pareto(series, marcos, xmax, 420, 330, "vm"))
+
+
+def _pareto(series: list[list], marcos: list[dict], xmax: int, width: float, height: float, cls: str) -> str:
     """series: [[rank, nome, votos, acumulado%], ...]; marcos: [{x, y, rotulo}]."""
     ml, mr, mt, mb = 44, 22, 12, 34
     pw, ph = width - ml - mr, height - mt - mb
@@ -292,6 +309,8 @@ def pareto_chart(series: list[list], marcos: list[dict], xmax: int, width: float
         g.append(f'<line class="grid" x1="{ml}" x2="{width - mr}" y1="{sy(v):.1f}" y2="{sy(v):.1f}"/>'
                  f'<text class="tick" x="{ml - 8}" y="{sy(v) + 4:.1f}" text-anchor="end">{v}%</text>')
     step = 1 if xmax <= 12 else 5 if xmax <= 60 else 10 if xmax <= 150 else 50
+    if width < 500 and step > 1:
+        step *= 2
     xt = [1] + [x for x in range(step, xmax + 1, step) if x != 1]
     for x in xt:
         g.append(f'<text class="tick" x="{sx(x):.1f}" y="{height - 12}" text-anchor="middle">{x}</text>')
@@ -300,13 +319,13 @@ def pareto_chart(series: list[list], marcos: list[dict], xmax: int, width: float
         if m["x"] > xmax:
             continue
         cx, cy = sx(m["x"]), sy(m["y"])
-        anchor = "start" if cx < width * 0.65 else "end"
+        anchor = "start" if cx < width * (0.5 if width < 500 else 0.65) else "end"
         dx = 12 if anchor == "start" else -12
         mk.append(f'<circle class="dot" cx="{cx:.1f}" cy="{cy:.1f}" r="5"/>'
                   f'<text class="dl" x="{cx + dx:.1f}" y="{cy + 18:.1f}" text-anchor="{anchor}">{esc(m["rotulo"])}</text>')
     data = json.dumps({"s": [r for r in series if r[0] <= xmax], "ml": ml, "pw": pw, "mt": mt, "ph": ph,
                        "xmax": xmax, "w": width, "h": height}, ensure_ascii=False)
-    return (f'<div class="pareto"><svg viewBox="0 0 {width:g} {height:g}" role="img" '
+    return (f'<div class="pareto {cls}"><svg viewBox="0 0 {width:g} {height:g}" role="img" '
             f'aria-label="Curva de concentração: percentual acumulado dos votos por município">'
             f'{"".join(g)}<path class="area" d="{area}"/><path class="ln" d="{line}"/>{"".join(mk)}'
             f'<g class="xh" hidden><line class="xl" y1="{mt}" y2="{mt + ph}"/><circle class="dot" r="5"/></g>'

@@ -35,7 +35,7 @@ FAVICON = "data:image/svg+xml," + __import__("urllib.parse", fromlist=["quote"])
 
 
 
-NAV = ('<nav class="top"><div class="in"><span class="brand"><i>' + ICON + '</i>Análise eleitoral</span>'
+NAV = ('<nav class="top"><div class="in"><span class="brand"><i>' + ICON + '</i>Eleições</span>'
        '<a href="#guia">Como ler</a></div>'
        '<div class="sec" id="secbar" hidden><span class="n"></span><span class="t"></span></div></nav>')
 
