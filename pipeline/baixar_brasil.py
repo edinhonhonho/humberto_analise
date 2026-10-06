@@ -15,16 +15,20 @@
     python baixar_brasil.py --exterior            # inclui ZZ (voto no exterior; só presidente)
 
 Ordem de grandeza (muda com a velocidade da sua conexão): cerca de 470 mil seções no país. Com ~10 a 15
-seções por segundo são de 9 a 13 horas; o cache .jsonl ocupa ~1 a 2 GB e os CSVs finais alguns GB.
-Para acelerar, rode dois terminais com UFs diferentes:  --uf SP,MG,RJ  e  --uf BA,PR,RS ...
+seções por segundo (uma UF por vez) são de 9 a 13 horas; com UFs em paralelo deve cair bastante; o cache .jsonl ocupa ~1 a 2 GB e os CSVs finais alguns GB.
+Vários estados são baixados ao mesmo tempo no mesmo terminal (--paralelas, padrão 4; cada um com --threads
+conexões). Se a conexão ou o TSE reclamar (muitos erros), diminua: --paralelas 2 --threads 4.
 Mantenha o computador ligado e sem suspender. Os nomes dos candidatos podem ser completados depois com
 python baixar_nomes.py --consulta ... (arquivo consulta_cand_2026.zip do TSE).
 """
 from __future__ import annotations
 
 import argparse
+import subprocess
 import sys
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import baixar_rs_completo as rs
@@ -43,9 +47,11 @@ def main() -> int:
     ap.add_argument("--uf", default="", help="UFs separadas por vírgula (padrão: todas)")
     ap.add_argument("--ano", type=int, default=2026)
     ap.add_argument("--pasta", default="dados")
-    ap.add_argument("--threads", type=int, default=8)
+    ap.add_argument("--threads", type=int, default=6, help="conexões simultâneas por UF")
+    ap.add_argument("--paralelas", type=int, default=4, help="quantas UFs ao mesmo tempo")
     ap.add_argument("--pleito", type=int, default=3220)
-    ap.add_argument("--ordem", choices=["menor", "alfabetica", "maior"], default="menor")
+    ap.add_argument("--ordem", choices=["menor", "alfabetica", "maior"], default=None,
+                    help="padrão: maior primeiro quando há UFs em paralelo (balanceia melhor), senão menor")
     ap.add_argument("--plano", action="store_true", help="só mostra o plano")
     ap.add_argument("--so-malhas", action="store_true")
     ap.add_argument("--sem-malhas", action="store_true", help="não baixa as malhas do IBGE")
@@ -59,8 +65,9 @@ def main() -> int:
     ufs = [u.strip().upper() for u in a.uf.split(",") if u.strip()] or list(UFS)
     if a.exterior and "ZZ" not in ufs:
         ufs.append("ZZ")
+    ordem = a.ordem or ("maior" if a.paralelas > 1 else "menor")
     chave = {"menor": lambda u: SECOES.get(u, 0), "maior": lambda u: -SECOES.get(u, 0),
-             "alfabetica": lambda u: u}[a.ordem]
+             "alfabetica": lambda u: u}[ordem]
     ufs.sort(key=chave)
 
     def pronto(uf):
@@ -85,21 +92,42 @@ def main() -> int:
 
     ok, falhas = [], []
     t0 = time.time()
-    for i, uf in enumerate(pend, 1):
-        print(f"\n######## {uf}  ({i}/{len(pend)}) ########", flush=True)
-        sys.argv = ["baixar_rs_completo.py", "--uf", uf, "--ano", str(a.ano), "--pasta", a.pasta,
-                    "--threads", str(a.threads), "--pleito", str(a.pleito)] + (["--limite", str(a.limite)] if a.limite else [])
-        try:
-            rc = rs.main()
-        except SystemExit as e:
-            rc = e.code or 0
-        except Exception as e:  # noqa: BLE001
-            print(f"  erro em {uf}: {e}")
-            rc = 1
-        (ok if rc == 0 else falhas).append(uf)
-        if rc not in (0, None) and rc == 1 and not pronto(uf):
-            print(f"  {uf} não terminou (rode de novo para continuar).")
-        print(f"  decorrido: {(time.time() - t0) / 3600:.1f} h", flush=True)
+    saida = threading.Lock()
+    procs: list = []
+
+    def rodar(uf):
+        cmd = [sys.executable, str(Path(__file__).with_name("baixar_rs_completo.py")), "--uf", uf, "--ano", str(a.ano),
+               "--pasta", a.pasta, "--threads", str(a.threads), "--pleito", str(a.pleito)]
+        if a.limite:
+            cmd += ["--limite", str(a.limite)]
+        with saida:
+            print(f"[{uf}] começando", flush=True)
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding="utf-8",
+                             errors="replace")
+        procs.append(p)
+        for linha in p.stdout:
+            linha = linha.rstrip()
+            if linha.strip():
+                with saida:
+                    print(f"[{uf}] {linha}", flush=True)
+        rc = p.wait()
+        with saida:
+            print(f"[{uf}] {'concluída' if rc == 0 else 'NÃO terminou (rode de novo para continuar)'}"
+                  f" · decorrido {(time.time() - t0) / 3600:.1f} h", flush=True)
+        return uf, rc
+
+    try:
+        with ThreadPoolExecutor(max(1, a.paralelas)) as ex:
+            for uf, rc in ex.map(rodar, pend):
+                (ok if rc == 0 else falhas).append(uf)
+    except KeyboardInterrupt:
+        print("\nInterrompido. Rode de novo para continuar de onde parou.")
+        for p in procs:
+            try:
+                p.terminate()
+            except Exception:  # noqa: BLE001
+                pass
+        return 1
 
     print("\n================ RESUMO ================")
     print("Concluídas:", ", ".join(ok) or "nenhuma")
