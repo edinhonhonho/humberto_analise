@@ -364,13 +364,11 @@ button.dcard.mais:hover{border-color:var(--red)}button.dcard.mais:hover .plus{tr
 .dcard.mais .tx{border-top:1px solid var(--line)}
 @media (max-width:600px){.dest{grid-template-columns:repeat(4,minmax(0,1fr))}.dcard.mais .plus{width:40px;height:40px;font-size:26px}}
 
-/* v20: card "outros candidatos" (tipográfico) */
+/* v20: card "outros candidatos" */
 button.dcard.mais{border:1px solid var(--line);color:var(--ink)}
 .dcard.mais::before{opacity:1}
-.dcard.mais .ph{top:0;bottom:62px;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--red)}
-.dcard.mais .num{font-size:52px;font-weight:700;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
-.dcard.mais .cap{font-size:12.5px;font-weight:600;color:var(--ink2);letter-spacing:.02em}
-.dcard.mais .tx::after{content:"→";position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--red);font-size:18px;transition:transform .15s}
-button.dcard.mais:hover .tx::after{transform:translate(4px,-50%)}
+.dcard.mais .ph{top:0;bottom:62px;align-items:center;justify-content:center;color:var(--red)}
+.dcard.mais .plus{display:block;color:var(--red);background:none;border-radius:0;padding:0;font-size:0;width:46px;height:46px;transition:transform .2s}
+button.dcard.mais:hover .plus{transform:rotate(90deg)}
 button.dcard.mais:hover{border-color:var(--red);transform:translateY(-3px)}
-@media (max-width:600px){.dcard.mais .num{font-size:26px}.dcard.mais .cap{font-size:10px;text-align:center;padding:0 4px;line-height:1.2}.dcard.mais .tx::after{display:none}.dcard.mais .ph{bottom:46px}}
+@media (max-width:600px){.dcard.mais .plus{width:30px;height:30px;font-size:0}.dcard.mais .ph{bottom:46px}}
