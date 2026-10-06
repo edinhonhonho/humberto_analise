@@ -1,17 +1,19 @@
-"""Escreve o relatório como site estático em pastas, ou como um único HTML offline.
+"""Escreve o relatório como site estático (uma página só + um arquivo de dados por candidato) ou como HTML offline.
 
-site/
-  index.html                         redireciona para o primeiro candidato em destaque
-  gerar.html                         pede ao servir.py que gere uma análise ainda não feita
-  assets/app.css|js, switcher.js     estilo e comportamento (a versão vai na URL: ?v=<hash>)
-  data/manifest.json|js              grupos (ano, UF, cargo) e destaques
-  data/idx/<ano>_<UF>_<cargo>.json|js  candidatos do grupo: [número, nome, votos, análise pronta (1/0)]
-  <ano>/<uf>/<cargo>/<número>/index.html + data.js   um relatório por candidato (cargo pelo nome: senador,
-                                     governador, deputado-federal, deputado-estadual)
+publico/
+  index.html                          a página (casca): barra, cards em destaque, seletor e a área do relatório
+  gerar.html                          pede ao servir.py que gere uma análise ainda não feita
+  assets/app.css|js, switcher.js      estilo e comportamento (a versão vai na URL: ?v=<hash>)
+  assets/static.js                    trechos de texto que se repetem em todos os relatórios (guia, notas)
+  assets/geo/<UF>_<hash>.js           traçados dos municípios de cada UF (um arquivo por UF)
+  data/manifest.json|js               grupos (ano, UF, cargo), destaques e siglas dos partidos
+  data/idx/<ano>_<UF>_<cargo>.json|js candidatos do grupo: [número, nome, votos, análise pronta (1/0)]
+  data/c/<ano>/<uf>/<cargo>/<número>.js   os dados de um candidato (texto, tabelas, mapas, detalhes)
 
-Cada candidato novo só escreve a sua pasta e atualiza o índice do seu grupo e o manifesto, então o
-site cresce candidato a candidato sem refazer o resto. Os dados são arquivos .js (window.__X = ...),
-que funcionam também abrindo o index.html direto do disco.
+A página é aberta como index.html?c=<ano>/<uf>/<cargo>/<número>. Trocar de candidato só busca o arquivo de
+dados dele e redesenha a área do relatório, sem recarregar a página. Cada candidato novo escreve o seu arquivo
+e atualiza o índice do seu grupo e o manifesto. Os dados são arquivos .js (window.__X = ...), que funcionam
+também abrindo o index.html direto do disco.
 """
 from __future__ import annotations
 
@@ -45,23 +47,49 @@ def _icones():
 def _head(titulo: str, css: str, favicon: str) -> str:
     return ('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width,initial-scale=1">'
-            f'<title>{html.escape(titulo)}</title><link rel="icon" href="{favicon}">{css}</head>')
+            f'<title>{html.escape(titulo)}</title><link rel="icon" type="image/svg+xml" href="{favicon}">{css}</head>')
 
 
 _NOSCRIPT = ('<noscript><p style="margin:16px 20px;font-size:13px;color:#5c5551">Sem JavaScript os mapas e tabelas '
              'aparecem, mas a busca por município, o painel de detalhes e a ordenação das tabelas ficam desativados.</p></noscript>')
 
 
-def _corpo(p: dict, icon: str) -> str:
-    return (f'{p["nav"]}<main>{p["corpo"]}<footer>{icon}<span>Gerado a partir de dados abertos do TSE e do IBGE.</span></footer></main>')
+def _compactar(blocos: list, det: dict) -> list:
+    """Dicas dos mapas: os rótulos (iguais em todos os municípios) vão numa tabela por mapa e o título que
+    coincide com o nome do município deixa de ser repetido (0 = usar o nome em det.mun)."""
+    mun = (det or {}).get("mun") or {}
+    out = []
+    for b in blocos or []:
+        if b.get("t") != "map" or "tl" in b:
+            out.append(b)
+            continue
+        tl: list = []
+        tp = {}
+        for cd, (tit, linhas) in b["tp"].items():
+            rs = []
+            for k, v in linhas:
+                if k not in tl:
+                    tl.append(k)
+                rs.append([tl.index(k), v])
+            nome = (mun.get(cd) or {}).get("n")
+            tp[cd] = [0 if tit == nome else tit, rs]
+        out.append(b | {"tp": tp, "tl": tl})
+    return out
+
+
+def _rodape(icon: str) -> str:
+    return f'<footer>{icon}<span>Gerado a partir de dados abertos do TSE e do IBGE.</span></footer>'
 
 
 # ------------------------------------------------------------------ HTML único
 def escrever_standalone(p: dict, destino) -> Path:
+    """Arquivo único e offline: CSS, JS, dados e traçados embutidos."""
+    from . import report
     icon, fav = _icones()
+    P = {"t": p["titulo"], "h": p["corpo"], "b": _compactar(p.get("blocos"), p["det"]), "d": p["det"], "gs": p.get("geo") or ""}
     doc = (_head(p["titulo"], f"<style>{_ler('app.css')}</style>", fav) +
-           f'<body>{_NOSCRIPT}{_corpo(p, icon)}<script>window.__DET={_js(p["det"])}</script>'
-           f'<script>{_ler("app.js")}</script></body></html>')
+           f'<body>{_NOSCRIPT}{report.NAV}<main id="app"></main><template id="foot">{_rodape(icon)}</template>'
+           f'<script>window.__P0={_js(P)}</script><script>{_ler("app.js")}</script></body></html>')
     destino = Path(destino)
     destino.write_text(doc, encoding="utf-8")
     return destino
@@ -77,9 +105,14 @@ def slug_cargo(cargo: int) -> str:
     return SLUGS.get(int(cargo), f"cargo-{int(cargo)}")
 
 
+def chave_pagina(ano, uf, cargo, numero) -> str:
+    """Chave de um candidato na URL: index.html?c=<chave>."""
+    return f"{int(ano)}/{str(uf).lower()}/{slug_cargo(cargo)}/{int(numero)}"
+
+
 def caminho_pagina(ano, uf, cargo, numero) -> str:
-    """Caminho relativo da página de um candidato (termina em /index.html)."""
-    return f"{int(ano)}/{str(uf).lower()}/{slug_cargo(cargo)}/{int(numero)}/index.html"
+    """Caminho relativo (dentro do site) do arquivo de dados de um candidato."""
+    return f"data/c/{chave_pagina(ano, uf, cargo, numero)}.js"
 
 
 def _assets(raiz: Path) -> dict:
@@ -194,79 +227,67 @@ def _trava(raiz: Path):
         f.close()
 
 
-_RE_DEFS = re.compile(r'<svg class="defs"[^>]*>.*?</svg>', re.S)
-_RE_USE = re.compile(r'<use [^>]*?data-tip="([^"]*)"[^>]*?/>')
+_RE_ESTATICO = re.compile(r'<details class="guide" id="guia">.*?</details>|<aside class="metodo">.*?</aside>', re.S)
 
 
-def _enxugar(corpo: str, uf: str, raiz: Path):
-    """Tira da página o que se repete entre candidatos: traçados dos municípios (arquivo por UF)
-    e textos de tooltip dos mapas (vão para data.js). Devolve (corpo, geo_src, tips)."""
-    import hashlib
-    import html as _h
-    m = _RE_DEFS.search(corpo)
-    geo = None
-    if m:
-        svg = m.group(0)
-        h = hashlib.sha1(svg.encode("utf-8")).hexdigest()[:10]
-        geo = f"geo/{str(uf).upper()}_{h}.js"
-        arq = raiz / "assets" / geo
-        if not arq.exists():
+def _estaticos(corpo: str, raiz: Path) -> str:
+    """Trechos idênticos em todos os relatórios (guia de leitura, notas metodológicas) ficam num arquivo
+    só (assets/static.js); a página guarda apenas um marcador <!--S:hash-->."""
+    novos: dict = {}
+
+    def troca(m):
+        h = _hash(m.group(0))
+        novos[h] = m.group(0)
+        return f"<!--S:{h}-->"
+
+    corpo = _RE_ESTATICO.sub(troca, corpo)
+    arq = raiz / "assets" / "static.js"
+    with _trava(raiz):
+        atual: dict = {}
+        if arq.exists():
+            try:
+                atual = json.loads(arq.read_text(encoding="utf-8").split("=", 1)[1].rstrip(";\n "))
+            except Exception:  # noqa: BLE001
+                atual = {}
+        if any(k not in atual for k in novos):
+            atual.update(novos)
             arq.parent.mkdir(parents=True, exist_ok=True)
-            arq.write_text("document.body.insertAdjacentHTML('afterbegin'," + json.dumps(svg) + ");", encoding="utf-8")
-        corpo = corpo.replace(svg, "", 1)
-    marcas = [(x.start(), x.group(1)) for x in re.finditer(r'<div class="mapcard" id="([^"]+)"', corpo)]
-    tips: dict = {}
+            arq.write_text("window.__S=" + _js(atual) + ";", encoding="utf-8")
+    return corpo
 
-    def troca(mm):
-        pos = mm.start()
-        mid = None
-        for ini, nome in marcas:
-            if ini <= pos:
-                mid = nome
-            else:
-                break
-        tag = mm.group(0)
-        did = re.search(r'data-id="(\d+)"', tag)
-        if not mid or not did:
-            return tag
-        try:
-            tips.setdefault(mid, {})[did.group(1)] = json.loads(_h.unescape(mm.group(1)))
-        except Exception:  # noqa: BLE001
-            return tag
-        return tag.replace(f' data-tip="{mm.group(1)}"', "")
 
-    corpo = _RE_USE.sub(troca, corpo)
-    return corpo, geo, tips
+def _geo(svg: str | None, uf: str, raiz: Path) -> str | None:
+    """Traçados dos municípios: um arquivo por UF (e por versão da malha)."""
+    if not svg:
+        return None
+    h = _hash(svg)
+    nome = f"{str(uf).upper()}_{h}"
+    arq = raiz / "assets" / "geo" / f"{nome}.js"
+    if not arq.exists():
+        arq.parent.mkdir(parents=True, exist_ok=True)
+        arq.write_text(f'(window.__GEO=window.__GEO||{{}})[{json.dumps(nome)}]={_js(svg)};', encoding="utf-8")
+    return nome
 
 
 def adicionar_candidato(p: dict, raiz) -> Path:
-    """Escreve a página do candidato e atualiza o índice do grupo e o manifesto."""
+    """Escreve o arquivo de dados do candidato e atualiza o índice do grupo e o manifesto."""
     raiz = Path(raiz)
-    a = _assets(raiz)
-    icon, fav = _icones()
+    _assets(raiz)
     rel = caminho_pagina(p["ano"], p["uf"], p["cargo_cod"], p["numero"])
-    pagina = raiz / rel
-    pasta = pagina.parent
-    pasta.mkdir(parents=True, exist_ok=True)
-    up = "../../../../"
-    corpo_html, geo, tips = _enxugar(_corpo(p, icon), p["uf"], raiz)
-    det = dict(p["det"])
-    det["tips"] = tips
-    (pasta / "data.js").write_text(f'window.__DET={_js(det)};', encoding="utf-8")
-    geo_tag = f'<script src="{up}assets/{geo}"></script>' if geo else ""
-    css = f'<link rel="stylesheet" href="{up}assets/{a["app.css"]}">'
-    cur = json.dumps({"ano": p["ano"], "uf": p["uf"], "cargo": p["cargo_cod"], "numero": int(p["numero"])})
-    doc = (_head(p["titulo"], css, fav) +
-           f"<body data-root=\"{up}\" data-cur='{cur}'>"
-           f'{_NOSCRIPT}{corpo_html}{geo_tag}<script src="data.js"></script>'
-           f'<script src="{up}assets/{a["app.js"]}"></script><script src="{up}assets/{a["switcher.js"]}"></script></body></html>')
-    pagina.write_text(doc, encoding="utf-8")
+    arq = raiz / rel
+    arq.parent.mkdir(parents=True, exist_ok=True)
+    corpo = _estaticos(p["corpo"], raiz)
+    P = {"t": p["titulo"], "h": corpo, "b": _compactar(p.get("blocos"), p["det"]), "d": p["det"], "g": _geo(p.get("geo"), p["uf"], raiz),
+         "m": {"ano": int(p["ano"]), "uf": p["uf"], "cargo": p["cargo_cod"], "numero": int(p["numero"]),
+               "nome": p["nome"], "cargo_nome": p["cargo"], "votos": int(p["votos"])}}
+    chave = chave_pagina(p["ano"], p["uf"], p["cargo_cod"], p["numero"])
+    arq.write_text(f'(window.__P=window.__P||{{}})[{json.dumps(chave)}]={_js(P)};', encoding="utf-8")
     with _trava(raiz):
         idx = [r for r in _ler_idx(raiz, p["ano"], p["uf"], p["cargo_cod"]) if int(r[0]) != int(p["numero"])]
         idx.append([int(p["numero"]), p["nome"], int(p["votos"]), 1])
         idx.sort(key=lambda r: -r[2])
         _publicar_grupo(raiz, p["ano"], p["uf"], p["cargo_cod"], idx)
-    return pagina
+    return arq
 
 
 def definir_destaques(raiz, lista: list[dict], base_dir, ano_padrao: int) -> None:
@@ -324,15 +345,19 @@ def _publicar(raiz: Path, man: dict, a: dict, icon: str, fav: str) -> None:
 
 
 def _entrada(raiz: Path, man: dict, a: dict, icon: str, fav: str) -> None:
-    """index.html abre direto no primeiro candidato em destaque; gerar.html pede a análise de quem ainda não tem."""
+    """index.html é a casca do site (a página única); gerar.html pede a análise de quem ainda não tem."""
+    from . import report
     padrao = next((d for d in man.get("destaques", []) if d["ok"]), None)
-    if padrao:
-        alvo = caminho_pagina(padrao["ano"], padrao["uf"], padrao["cargo"], padrao["numero"])
-        (raiz / "index.html").write_text(
-            '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">'
-            f'<meta http-equiv="refresh" content="0;url={alvo}"><title>Análise eleitoral</title>'
-            f'</head><body><p><a href="{alvo}">Abrir a análise de {html.escape(padrao["nome"])}</a></p>'
-            f'<script>location.replace({json.dumps(alvo)})</script></body></html>', encoding="utf-8")
+    pad = json.dumps(chave_pagina(padrao["ano"], padrao["uf"], padrao["cargo"], padrao["numero"])) if padrao else "null"
+    css = f'<link rel="stylesheet" href="assets/{a["app.css"]}">'
+    (raiz / "index.html").write_text(
+        _head("Análise eleitoral", css, fav) +
+        f'<body data-shell="1" data-root="" data-padrao=\'{pad}\'>{_NOSCRIPT}{report.NAV}'
+        f'<div id="dest-slot"></div><main id="app"><p class="carregando">Carregando a análise…</p></main>'
+        f'<template id="foot">{_rodape(icon)}</template>'
+        f'<script src="data/manifest.js"></script><script src="assets/static.js?v={int(_time.time())}"></script>'
+        f'<script src="assets/{a["app.js"]}"></script><script src="assets/{a["switcher.js"]}"></script></body></html>',
+        encoding="utf-8")
     (raiz / "gerar.html").write_text(
         _head("Gerando análise", f'<link rel="stylesheet" href="assets/{a["app.css"]}">', fav) +
         f'<body><main class="land"><header class="hd"><div class="mark">{icon}</div>'

@@ -13,6 +13,35 @@ import numpy as np
 
 SEQ_STEPS = ["s1", "s2", "s3", "s4", "s5", "s6"]
 
+# Modo "blocos": tabelas e mapas dos municípios não viram HTML; viram dados (BLK) e um marcador no HTML.
+# O navegador desenha os blocos a partir dos dados (web/app.js). None = HTML direto (modo antigo).
+BLK: list | None = None
+GEO: str | None = None   # <svg> com os traçados dos municípios da página (vai para um arquivo por UF)
+
+
+def iniciar_blocos(ativo: bool = True) -> None:
+    global BLK, GEO
+    BLK = [] if ativo else None
+    GEO = None
+
+
+def registrar(bloco: dict) -> str:
+    BLK.append(bloco)
+    return f'<div class="blk" data-b="{len(BLK) - 1}"></div>'
+
+
+def _num(v, nd: int = 4):
+    """Número enxuto para JSON: None se vazio, int se inteiro, senão arredondado."""
+    if v is None:
+        return None
+    try:
+        f = float(v)
+    except (TypeError, ValueError):
+        return None
+    if math.isnan(f) or math.isinf(f):
+        return None
+    return int(f) if f == int(f) and abs(f) < 1e15 else round(f, nd)
+
 
 # ------------------------------------------------------------------ formatação pt-BR
 def fnum(x, dec: int = 0) -> str:
@@ -166,9 +195,14 @@ def classes_categoria(values, mapa: dict, ordem: list):
 # ------------------------------------------------------------------ geometria compartilhada
 def geo_defs(polys: list[dict]) -> str:
     """Traçados dos municípios, definidos uma vez por página; os mapas os reutilizam com <use>."""
+    global GEO
     ps = "".join(f'<path id="g{p["id"]}" d="{p["d"]}" vector-effect="non-scaling-stroke"/>'
                  for p in polys if p.get("id") is not None and p["d"])
-    return f'<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false"><defs>{ps}</defs></svg>'
+    svg = f'<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false"><defs>{ps}</defs></svg>'
+    if BLK is not None:
+        GEO = svg
+        return ""
+    return svg
 
 
 # ------------------------------------------------------------------ mapa interativo
@@ -177,6 +211,13 @@ def map_card(uid: str, polys: list[dict], metrics: list[dict], proj: Proj, point
     """polys: [{d, tip: [titulo, [[rotulo, valor], ...]], cls: [classe por métrica]}]
     metrics: [{key, label, note, legend: [(classe, rótulo)]}]
     points: [{x, y, r, tip}] (opcional)"""
+    if BLK is not None and not points and not bg and polys and all(p.get("id") is not None for p in polys):
+        return registrar({
+            "t": "map", "id": uid, "vb": f"0 0 {proj.W:g} {proj.H:.0f}", "aria": aria,
+            "m": [{"key": m["key"], "label": m["label"], "note": m.get("note", ""), "legend": [list(x) for x in m["legend"]]}
+                  for m in metrics],
+            "i": [int(p["id"]) for p in polys], "k": [" ".join(p["cls"]) for p in polys],
+            "tp": {str(int(p["id"])): p["tip"] for p in polys}})
     paths = []
     for p in polys:
         tip = esc(json.dumps(p["tip"], ensure_ascii=False))

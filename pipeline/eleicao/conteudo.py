@@ -92,7 +92,7 @@ vizinhos com % de votos acima do esperado; <em>ponto frio</em> = abaixo do esper
 """
 
 GUIA = """
-<details class="guide" open id="guia"><summary>Como ler este relatório: o que significam os números e mapas</summary>
+<details class="guide" id="guia"><summary>Como ler este relatório: o que significam os números e mapas</summary>
 <dl>
 <dt>% dos votos válidos</dt><dd><p>De cada 100 votos válidos dados no município (sem brancos e nulos), quantos foram para o
 candidato. É o melhor jeito de comparar cidades grandes e pequenas.</p></dd>

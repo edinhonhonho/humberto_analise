@@ -30,15 +30,34 @@ HS_VIEWBOX = "0 0 24 24"
 ICON = (f'<svg class="hs" viewBox="{HS_VIEWBOX}" fill="currentColor" aria-hidden="true"><path d="{HS_PATH}"/></svg>')
 _FAV = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#c8102e"/>'
         f'<svg x="4" y="4" width="16" height="16" viewBox="{HS_VIEWBOX}" fill="#f6c21c"><path d="{HS_PATH}"/></svg></svg>')
-FAVICON = "data:image/svg+xml," + __import__("urllib.parse", fromlist=["quote"]).quote(_FAV, safe="/:=\"' ")
+FAVICON = "data:image/svg+xml," + __import__("urllib.parse", fromlist=["quote"]).quote(_FAV, safe="/:=")
 
 
+
+
+NAV = ('<nav class="top"><div class="in"><span class="brand"><i>' + ICON + '</i>Análise eleitoral</span>'
+       '<a href="#guia">Como ler</a></div>'
+       '<div class="sec" id="secbar" hidden><span class="n"></span><span class="t"></span></div></nav>')
 
 
 # ------------------------------------------------------------------ pequenos componentes
 def tabela(df: pd.DataFrame, colunas, max_linhas=25, uid: str | None = None, search=False) -> str:
-    """colunas: (coluna, cabeçalho, tipo) com tipo em t (texto), tw (texto longo), i, d1, d2."""
+    """colunas: (coluna, cabeçalho, tipo) com tipo em t (texto), tw (texto longo), i, d1, d2, ib."""
     d = df.head(max_linhas)
+    tid = uid or f"t{abs(hash(str(colunas) + str(len(d)))) % 10**8}"
+    if svgviz.BLK is not None:
+        linhas = []
+        for _, r in d.iterrows():
+            lin = []
+            for c, _, t in colunas:
+                v = r[c]
+                if t in ("t", "tw"):
+                    lin.append(str(v) if pd.notna(v) and v != "" else None)
+                else:
+                    lin.append(svgviz._num(v, 6) if pd.notna(v) else None)
+            linhas.append(lin)
+        return svgviz.registrar({"t": "tab", "id": tid, "s": 1 if search else 0,
+                                 "c": [[h, t] for _, h, t in colunas], "r": linhas})
     cab = "".join(f'<th class="{"t" if t in ("t", "tw") else ""}">{esc(h)}</th>' for _, h, t in colunas)
     linhas = []
     for _, r in d.iterrows():
@@ -58,7 +77,6 @@ def tabela(df: pd.DataFrame, colunas, max_linhas=25, uid: str | None = None, sea
                 raw = "" if pd.isna(v) else f' data-v="{float(v)}"'
                 tds.append(f'<td class="num"{raw}>{fnum(v, dec) if pd.notna(v) else "–"}</td>')
         linhas.append("<tr>" + "".join(tds) + "</tr>")
-    tid = uid or f"t{abs(hash(str(colunas) + str(len(d)))) % 10**8}"
     busca = (f'<input class="search" type="search" placeholder="Buscar município" data-for="{tid}" '
              f'aria-label="Buscar">') if search else ""
     return (f'{busca}<div class="tw"><table class="sortable" id="{tid}"><thead><tr>{cab}</tr></thead>'
@@ -167,6 +185,7 @@ def montar(ctx: dict) -> dict:
     gm, mun = ctx["gm"], ctx["municipal"]
     nome = nome_pt(info["nome"])
     _USADAS.clear()
+    svgviz.iniciar_blocos(True)
     partes: list[str] = []
     a = partes.append
 
@@ -532,14 +551,11 @@ def montar(ctx: dict) -> dict:
     corpo = corpo.replace("@@REFS@@", "".join(f"<li>{REFS[k]}</li>" for k in sorted(_USADAS, key=lambda k: REFS[k])))
     grupos = _toc(idx)
     chev = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>'
-    nav = ('<nav class="top"><div class="in"><span class="brand"><i>' + ICON + '</i>Análise eleitoral</span>'
-           '<a href="#guia">Como ler</a>'
-           f'<button class="idx" id="idxb" type="button" aria-expanded="false" aria-controls="idxp">Índice{chev}</button></div>'
-           f'<div class="idxp" id="idxp" hidden>{grupos}</div>'
-           '<div class="sec" id="secbar" hidden><span class="n"></span><span class="t"></span></div></nav>')
+    nav = NAV
     toc = f'<section class="toc" id="sumario"><h3>Sumário</h3><div class="tocg">{grupos}</div></section>'
     corpo = corpo.replace('<div class="parte">', toc + '<div class="parte">', 1)
     pagina = {"titulo": f'{nome} · análise espacial {ctx["ano"]}', "nav": nav, "corpo": corpo,
+              "blocos": svgviz.BLK, "geo": svgviz.GEO,
               "det": _detalhes(ctx, gm, tem_an=bool(ctx.get("analises"))), "ano": ctx["ano"], "uf": ctx["uf"], "cargo_cod": int(ctx.get("cargo", 7)),
               "numero": info["numero"], "nome": nome, "cargo": ctx["cargo_nome"],
               "turno": info["turno"], "votos": int(info["votos_total"])}

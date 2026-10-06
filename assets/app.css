@@ -307,3 +307,14 @@ nav.top button.swbtn{margin-left:auto}
 .mapcard{align-items:center}
 .mapcard .mapmain{align-self:center;display:flex;align-items:center}
 .mapcard .mapside{align-self:center}
+
+/* v17: casca única */
+#dest-slot{max-width:1080px;margin:0 auto;padding:0 20px}
+[data-shell] header.hd{padding-top:30px}
+[data-shell] header.hd::before{top:-260px}
+[data-shell] header.hd .mark{display:none}
+.swa{max-width:none}
+nav.top .swp a.row{border-radius:8px;padding:9px 10px;margin:0;width:100%;box-sizing:border-box;transition:background .12s}
+nav.top .swp a.row:hover{background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink)}
+nav.top .swp a.row[aria-current]{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+.swl .row.off{padding:9px 10px;box-sizing:border-box}
