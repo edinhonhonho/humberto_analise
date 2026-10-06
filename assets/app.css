@@ -372,3 +372,22 @@ button.dcard.mais{border:1px solid var(--line);color:var(--ink)}
 button.dcard.mais:hover .plus{transform:rotate(90deg)}
 button.dcard.mais:hover{border-color:var(--red);transform:translateY(-3px)}
 @media (max-width:600px){.dcard.mais .plus{width:30px;height:30px;font-size:0}.dcard.mais .ph{bottom:46px}}
+
+/* v21: zoom nos mapas, legenda no topo, card com contagem */
+.mapcard{align-items:flex-start}
+.mapcard .mapmain{position:relative;align-self:flex-start}
+.mapcard .mapside{align-self:flex-start}
+.zoomctl{position:absolute;top:6px;right:6px;z-index:3;display:flex;flex-direction:column;gap:6px}
+.zoomctl button{display:grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink2);cursor:pointer;box-shadow:0 1px 2px rgba(30,10,5,.08)}
+.zoomctl button:hover{color:var(--red);border-color:var(--red)}
+.zoomctl svg{width:18px;height:18px}
+.mapcard svg.map{touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.mapcard.zoomed svg.map{touch-action:none;cursor:grab}
+.mapcard.zoomed svg.map:active{cursor:grabbing}
+.mapcard .mapmain{overflow:hidden;border-radius:12px}
+@media (max-width:600px){.zoomctl button{width:38px;height:38px}}
+.dcard.mais .ph{flex-direction:column;gap:6px}
+.dcard.mais .plus{width:34px;height:34px}
+.dcard.mais .num{font-size:40px;font-weight:700;letter-spacing:-.04em;line-height:1;color:var(--red);font-variant-numeric:tabular-nums}
+.dcard.mais .cap{font-size:12px;font-weight:600;color:var(--ink2);margin-top:-4px}
+@media (max-width:600px){.dcard.mais .plus{width:20px;height:20px}.dcard.mais .num{font-size:24px}.dcard.mais .cap{font-size:9.5px;text-align:center;line-height:1.15;padding:0 3px}}

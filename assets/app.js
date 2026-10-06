@@ -37,11 +37,45 @@ function tabHtml(b){
   return `<td class="num"${v===null?'':` data-v="${v}"`}>${v===null?'–':nf(v,dec[t])}</td>`}).join('')+'</tr>').join('');
  return (b.s?`<input class="search" type="search" placeholder="Buscar município" data-for="${b.id}" aria-label="Buscar">`:'')+
   `<div class="tw"><table class="sortable" id="${b.id}"><thead><tr>${th}</tr></thead><tbody>${tr}</tbody></table></div>`}
+const IC=(d)=>`<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const ZOOM=`<div class="zoomctl" role="group" aria-label="Zoom do mapa"><button type="button" data-z="in" aria-label="Aproximar" title="Aproximar">${IC('<path d="M12 5v14M5 12h14"/>')}</button><button type="button" data-z="out" aria-label="Afastar" title="Afastar">${IC('<path d="M5 12h14"/>')}</button><button type="button" data-z="reset" aria-label="Centralizar o mapa" title="Centralizar">${IC('<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>')}</button></div>`;
 function mapHtml(b){
  const paths=b.i.map((id,j)=>`<use href="#g${id}" class="p k-${b.k[j].split(' ')[0]}" data-id="${id}" data-k="${b.k[j]}"/>`).join('');
  const seg=b.m.map((m,i)=>`<button type="button" role="radio" aria-checked="${i===0}" data-m="${i}">${esc(m.label)}</button>`).join('');
- return `<div class="mapcard" id="${b.id}"><div class="mapmain"><svg class="map" viewBox="${b.vb}" role="img" aria-label="${esc(b.aria)}"><g class="polys">${paths}</g></svg></div>`+
+ return `<div class="mapcard" id="${b.id}"><div class="mapmain">${ZOOM}<svg class="map" viewBox="${b.vb}" role="img" aria-label="${esc(b.aria)}"><g class="polys">${paths}</g></svg></div>`+
   `<aside class="mapside"><div class="seg" role="radiogroup" aria-label="Métrica do mapa">${seg}</div><p class="note mnote"></p><ul class="legend"></ul></aside></div>`}
+
+
+/* zoom e deslocamento dos mapas */
+function zoomMapa(card){
+ const svg=card.querySelector('svg.map');if(!svg)return;
+ const mm=card.querySelector('.mapmain');
+ if(!mm.querySelector('.zoomctl'))mm.insertAdjacentHTML('afterbegin',ZOOM);
+ const vb0=svg.getAttribute('viewBox').split(/[ ,]+/).map(Number);let v=vb0.slice();
+ const apply=()=>{svg.setAttribute('viewBox',v.map(x=>+x.toFixed(2)).join(' '));card.classList.toggle('zoomed',v[2]<vb0[2]-.01)};
+ const clamp=()=>{v[0]=Math.min(Math.max(v[0],vb0[0]),vb0[0]+vb0[2]-v[2]);v[1]=Math.min(Math.max(v[1],vb0[1]),vb0[1]+vb0[3]-v[3])};
+ function pt(cx,cy){const r=svg.getBoundingClientRect(),s=Math.min(r.width/v[2],r.height/v[3]),ox=(r.width-v[2]*s)/2,oy=(r.height-v[3]*s)/2;
+  return {x:v[0]+(cx-r.left-ox)/s,y:v[1]+(cy-r.top-oy)/s,s}}
+ function zoom(f,cx,cy){let nw=Math.min(vb0[2],Math.max(vb0[2]/14,v[2]/f));const k=nw/v[2];
+  if(cx==null){cx=v[0]+v[2]/2;cy=v[1]+v[3]/2}
+  v=[cx-(cx-v[0])*k,cy-(cy-v[1])*k,nw,v[3]*k];clamp();apply()}
+ card.querySelectorAll('.zoomctl button').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const z=b.dataset.z;
+  if(z==='in')zoom(1.6);else if(z==='out')zoom(1/1.6);else{v=vb0.slice();apply()}}));
+ svg.addEventListener('wheel',e=>{if(!(e.ctrlKey||e.metaKey))return;e.preventDefault();const p=pt(e.clientX,e.clientY);zoom(Math.exp(-e.deltaY*.012),p.x,p.y)},{passive:false});
+ const ptrs=new Map();let drag=false,moved=false,last=null,d0=0;
+ svg.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;ptrs.set(e.pointerId,[e.clientX,e.clientY]);moved=false;
+  if(ptrs.size===2){const [a,b]=[...ptrs.values()];d0=Math.hypot(a[0]-b[0],a[1]-b[1])}last=[e.clientX,e.clientY]});
+ svg.addEventListener('pointermove',e=>{if(!ptrs.has(e.pointerId))return;
+  if(ptrs.size===2){const o=[...ptrs.entries()].find(([id])=>id!==e.pointerId)[1],a=[e.clientX,e.clientY],d=Math.hypot(a[0]-o[0],a[1]-o[1]);
+   ptrs.set(e.pointerId,a);if(d0&&d>0){const p=pt((a[0]+o[0])/2,(a[1]+o[1])/2);zoom(d/d0,p.x,p.y)}d0=d;moved=true;return}
+  ptrs.set(e.pointerId,[e.clientX,e.clientY]);if(!card.classList.contains('zoomed')||!last)return;
+  const dx=e.clientX-last[0],dy=e.clientY-last[1];
+  if(!moved&&Math.hypot(dx,dy)<5)return;
+  if(!moved){moved=true;try{svg.setPointerCapture(e.pointerId)}catch(_){}tip.hidden=true}
+  const s=pt(0,0).s||1;v[0]-=dx/s;v[1]-=dy/s;clamp();apply();last=[e.clientX,e.clientY]});
+ const fim=e=>{ptrs.delete(e.pointerId);if(ptrs.size<2)d0=0;if(ptrs.size===0)last=null;else{const r=[...ptrs.values()][0];last=r}};
+ svg.addEventListener('pointerup',fim);svg.addEventListener('pointercancel',fim);
+ card.addEventListener('click',e=>{if(moved){e.stopPropagation();e.preventDefault();moved=false}},true)}
 
 /* ---------- comportamento de cada página (refeito a cada troca) ---------- */
 function iniciar(){
@@ -54,6 +88,7 @@ function iniciar(){
    legend.replaceChildren(...cfg.metrics[i].legend.map(([c,l])=>{const li=mk('li'),sw=mk('i','sw k-'+c);li.append(sw,document.createTextNode(l));return li}));note.textContent=cfg.metrics[i].note}
   btns.forEach((x,i)=>x.addEventListener('click',()=>set(i)));set(0);
   const chk=card.querySelector('.showpts');if(chk)chk.addEventListener('change',()=>{card.querySelector('.pts').hidden=!chk.checked});
+  zoomMapa(card);
   paths.forEach(p=>p.addEventListener('pointerenter',()=>{if(p.nextElementSibling&&!p.classList.contains('sel'))p.parentNode.appendChild(p)}))});
  app.querySelectorAll('.pareto').forEach(w=>{
   const d=JSON.parse(w.querySelector('.pdat').textContent),svg=w.querySelector('svg'),xh=svg.querySelector('.xh'),
