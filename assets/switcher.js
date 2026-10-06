@@ -12,7 +12,7 @@ const pan=mk('div','swp');pan.hidden=true;bar.appendChild(btn);nav.appendChild(p
 let uf=null,cargo=null,M=null,mostrar=10;const cache={};
 const uniq=a=>[...new Set(a)];
 const ttl=mk('h2','swt','Trocar candidato');
-const aviso=mk('p','swa','Análises geradas apenas para candidatos de partidos de esquerda, além dos destaques. Os demais candidatos ficam fora da lista, a menos que você peça para mostrá-los.');
+const aviso=mk('p','swa','Análises geradas apenas para candidatos de partidos de esquerda. Os demais candidatos ficam fora da lista, a menos que você peça para mostrá-los.');
 const gu=mk('div','swgrp'),gc=mk('div','swgrp');
 const qw=mk('div','swq'),q=mk('input');q.type='search';q.placeholder='Buscar por nome ou número';q.autocomplete='off';q.setAttribute('aria-label','Buscar candidato');qw.appendChild(q);
 const sem=mk('label','swchk');const ck=mk('input');ck.type='checkbox';sem.append(ck,document.createTextNode(' Mostrar também candidatos sem análise'));
