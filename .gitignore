@@ -2,3 +2,4 @@ __pycache__/
 pipeline/dados/
 pipeline/saida*/
 .cache/
+site_publicar/

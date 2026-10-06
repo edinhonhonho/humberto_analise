@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_RJ_governador"]=[[22,"Candidato 22",4271199,0],[55,"Candidato 55",3706984,0],[10,"Candidato 10",274411,0],[50,"Candidato 50",235347,1],[14,"Candidato 14",84889,0],[30,"Candidato 30",45359,0],[80,"Candidato 80",33430,1],[16,"Candidato 16",14642,1],[29,"Candidato 29",2777,1]];

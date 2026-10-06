@@ -219,13 +219,24 @@ def load_votacao_secao(path, numero: int, cargo: int = 7, turno: int = 1, uf: st
     return secoes, cand, info
 
 
-def mais_votados(raw: pd.DataFrame, cargo: int, n: int) -> list[int]:
-    """Números dos n candidatos mais votados do cargo (sem branco, nulo e legenda)."""
+def totais_votaveis(raw: pd.DataFrame, cargo: int) -> pd.Series:
+    """Votos totais de cada candidato do cargo (índice = número), do mais votado ao menos votado."""
+    nr = raw["NR_VOTAVEL"]
+    ok = ~nr.isin([COD_BRANCO, COD_NULO])
+    if cargo in CARGOS_PROPORCIONAIS:
+        ok &= nr > 99
+    tot = raw[ok].groupby("NR_VOTAVEL")["QT_VOTOS"].sum()
+    return tot[tot > 0].sort_values(ascending=False)
+
+
+def mais_votados(raw: pd.DataFrame, cargo: int, n: int, min_votos: int = 0) -> list[int]:
+    """Números dos n candidatos mais votados do cargo (sem branco, nulo e legenda), com ao menos min_votos."""
     nr = raw["NR_VOTAVEL"]
     ok = ~nr.isin([COD_BRANCO, COD_NULO])
     if cargo in CARGOS_PROPORCIONAIS:
         ok &= nr > 99
     tot = raw[ok].groupby("NR_VOTAVEL")["QT_VOTOS"].sum().sort_values(ascending=False)
+    tot = tot[tot >= int(min_votos)]
     return [int(x) for x in tot.head(n).index]
 
 

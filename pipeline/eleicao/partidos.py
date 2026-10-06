@@ -17,3 +17,27 @@ def partido_de(n):
     if isinstance(n, pd.Series):
         return pd.Series(p, index=n.index)
     return int(p) if p.ndim == 0 else p
+
+
+# ------------------------------------------------------------------ espectro político
+import json as _json
+from pathlib import Path as _Path
+
+_ESP = None
+
+
+def _espectros() -> dict:
+    global _ESP
+    if _ESP is None:
+        arq = _Path(__file__).resolve().parent.parent / "espectro.json"
+        try:
+            _ESP = {int(k): v for k, v in _json.loads(arq.read_text(encoding="utf-8"))["partidos"].items()}
+        except Exception:  # noqa: BLE001
+            _ESP = {}
+    return _ESP
+
+
+def espectro_de(numero_candidato) -> str:
+    """'esquerda', 'centro', 'direita' ou 'nao_classificado', a partir do número do candidato."""
+    d = _espectros().get(int(partido_de(int(numero_candidato))))
+    return d["espectro"] if d else "nao_classificado"

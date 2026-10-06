@@ -1,1 +1,0 @@
-(window.__IDX=window.__IDX||{})["2026_RS_7"]=[[65065,"Humberto Matos",40122]];
