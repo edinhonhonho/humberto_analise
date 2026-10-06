@@ -363,3 +363,13 @@ button.dcard.mais{font:inherit;cursor:pointer;padding:0;text-align:left;border:1
 button.dcard.mais:hover{border-color:var(--red)}button.dcard.mais:hover .plus{transform:scale(1.08)}
 .dcard.mais .tx{border-top:1px solid var(--line)}
 @media (max-width:600px){.dest{grid-template-columns:repeat(4,minmax(0,1fr))}.dcard.mais .plus{width:40px;height:40px;font-size:26px}}
+
+/* v20: card "outros candidatos" */
+button.dcard.mais{border:1px solid var(--line);color:var(--ink)}
+.dcard.mais::before{opacity:1}
+.dcard.mais .ph{top:0;align-items:flex-end;justify-content:center;color:var(--red)}
+.dcard.mais .crowd{width:88%;height:auto;max-height:100%;display:block;filter:drop-shadow(0 6px 8px rgba(40,10,10,.12))}
+.dcard.mais .crowd .c2{color:var(--gold)}
+.dcard.mais .crowd g{transition:transform .2s}
+button.dcard.mais:hover .c2{transform:translateX(-4px)}button.dcard.mais:hover .c3{transform:translateX(4px)}
+button.dcard.mais:hover{border-color:var(--red);transform:translateY(-3px)}

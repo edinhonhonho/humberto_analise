@@ -37,7 +37,7 @@ function cards(){const D=(M&&M.destaques)||[],slot=document.getElementById('dest
   const tx=mk('span','tx');tx.append(mk('b',null,d.nome),mk('small',null,d.cargo_nome+' · '+d.uf+' · nº '+d.numero));
   el.append(ph,tx);if(here)el.appendChild(mk('em',null,'em análise'));sec.appendChild(el)});
  const mais=mk('button','dcard mais');mais.type='button';mais.setAttribute('aria-label','Outros candidatos: abrir a lista');
- const ph=mk('span','ph');ph.appendChild(mk('span','plus','+'));const tx=mk('span','tx');tx.append(mk('b',null,'Outros candidatos'),mk('small',null,'Ver todos'));
+ const ph=mk('span','ph');ph.innerHTML='<svg class="crowd" viewBox="0 0 170 120" aria-hidden="true"><g fill="currentColor"><g class="c3" opacity=".30"><circle cx="136" cy="56" r="14"/><path d="M106 120c0-24 13-34 30-34s30 10 30 34z"/></g><g class="c2" opacity=".5"><circle cx="34" cy="56" r="14"/><path d="M4 120c0-24 13-34 30-34s30 10 30 34z"/></g><g class="c1"><circle cx="85" cy="42" r="20"/><path d="M42 120c0-36 19-52 43-52s43 16 43 52z"/></g></g></svg>';const tx=mk('span','tx');tx.append(mk('b',null,'Outros candidatos'),mk('small',null,'Buscar por nome ou número'));
  mais.append(ph,tx);mais.addEventListener('click',e=>{e.stopPropagation();if(pan.hidden)btn.click();scrollTo({top:0,behavior:'smooth'})});sec.appendChild(mais);
  slot.replaceChildren(sec)}
 document.addEventListener('app:page',e=>{cur=e.detail;if(M)cards();if(M&&!pan.hidden){uf=cur?cur.uf:uf;cargo=cur?cur.cargo:cargo;if(fi){montar();lista()}}});
