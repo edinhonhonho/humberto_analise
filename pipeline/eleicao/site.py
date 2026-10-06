@@ -350,6 +350,8 @@ def _entrada(raiz: Path, man: dict, a: dict, icon: str, fav: str) -> None:
     padrao = next((d for d in man.get("destaques", []) if d["ok"]), None)
     pad = json.dumps(chave_pagina(padrao["ano"], padrao["uf"], padrao["cargo"], padrao["numero"])) if padrao else "null"
     css = f'<link rel="stylesheet" href="assets/{a["app.css"]}">'
+    css += ('<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>'
+            '<script defer src="/_vercel/insights/script.js" data-disable-auto-track="1"></script>')
     (raiz / "index.html").write_text(
         _head("Eleições", css, fav) +
         f'<body data-shell="1" data-root="" data-padrao=\'{pad}\'>{_NOSCRIPT}{report.NAV}'

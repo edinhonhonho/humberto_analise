@@ -174,6 +174,7 @@ const App=window.App={atual:null,
    if(o.push!==false){const u=new URL(location.href);u.search='?c='+key;u.hash='';
     (o.replace?history.replaceState:history.pushState).call(history,null,'',u)}
    App.atual=key;desenhar(P,g);fim();
+   if(window.va)try{va('pageview',{route:null,path:'/'+key})}catch(_){}
    if(!o.semScroll)scrollTo(0,0);
    document.dispatchEvent(new CustomEvent('app:page',{detail:P.m||null}))}
   catch(_){if(my!==seq)return;fim();app.innerHTML='<p class="carregando">Essa análise ainda não foi gerada. Use <b>Trocar candidato</b> para escolher outra.</p>'}}};
