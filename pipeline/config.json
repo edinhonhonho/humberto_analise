@@ -1,0 +1,53 @@
+{
+  "ano": 2026,
+  "uf": "RS",
+  "cargo": 7,
+  "turno": 1,
+  "numero": 65065,
+  "pasta_dados": "dados",
+  "saida": "saida_{ano}",
+  "top_cidades": 10,
+  "cidades": "",
+  "h3_res": "auto",
+  "permutacoes": 999,
+  "png": false,
+  "hex": false,
+  "nome": "Humberto Matos",
+  "ufs": [
+    "RS",
+    "RJ",
+    "PE"
+  ],
+  "destaques": [
+    {
+      "nome": "Humberto Matos",
+      "uf": "RS",
+      "cargo": 7,
+      "numero": 65065,
+      "foto": "fotos/humberto.webp"
+    },
+    {
+      "nome": "Jones Manoel",
+      "uf": "PE",
+      "cargo": 6,
+      "numero": 5050,
+      "foto": "fotos/jones.webp"
+    },
+    {
+      "nome": "Elias Jabbour",
+      "uf": "RJ",
+      "cargo": 6,
+      "numero": 6577,
+      "foto": "fotos/elias.webp"
+    }
+  ],
+  "lote": {
+    "1": 99,
+    "3": 99,
+    "5": 99,
+    "6": 40,
+    "7": 40
+  },
+  "permutacoes_lote": 199,
+  "top_cidades_lote": 3
+}

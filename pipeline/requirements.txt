@@ -1,0 +1,13 @@
+pandas
+numpy
+geopandas
+pyogrio
+shapely
+h3
+esda
+libpysal
+mapclassify
+matplotlib
+folium
+scipy
+openpyxl

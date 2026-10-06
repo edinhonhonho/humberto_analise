@@ -1,0 +1,30 @@
+{
+ "ano": 2026,
+ "uf": "RS",
+ "cargo": 7,
+ "turno": 1,
+ "numero": 65065,
+ "pasta_dados": "dados",
+ "saida": "saida_{ano}",
+ "top_cidades": 10,
+ "h3_res": "auto",
+ "permutacoes": 999,
+ "nome": "Humberto Matos",
+ "lote": {
+  "3": 2,
+  "1": 1,
+  "5": 1,
+  "6": 1
+ },
+ "permutacoes_lote": 99,
+ "destaques": [
+  {
+   "nome": "Humberto Matos",
+   "uf": "RS",
+   "cargo": 7,
+   "numero": 65065,
+   "foto": "fotos/humberto.webp"
+  }
+ ],
+ "top_cidades_lote": 1
+}
