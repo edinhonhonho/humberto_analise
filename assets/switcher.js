@@ -36,6 +36,9 @@ function cards(){const D=(M&&M.destaques)||[],slot=document.getElementById('dest
   const ph=mk('span','ph');if(d.foto){const im=mk('img');im.src=root+'assets/'+d.foto;im.alt=d.nome;ph.appendChild(im)}
   const tx=mk('span','tx');tx.append(mk('b',null,d.nome),mk('small',null,d.cargo_nome+' · '+d.uf+' · nº '+d.numero));
   el.append(ph,tx);if(here)el.appendChild(mk('em',null,'em análise'));sec.appendChild(el)});
+ const mais=mk('button','dcard mais');mais.type='button';mais.setAttribute('aria-label','Outros candidatos: abrir a lista');
+ const ph=mk('span','ph');ph.appendChild(mk('span','plus','+'));const tx=mk('span','tx');tx.append(mk('b',null,'Outros candidatos'),mk('small',null,'Ver todos'));
+ mais.append(ph,tx);mais.addEventListener('click',e=>{e.stopPropagation();if(pan.hidden)btn.click();scrollTo({top:0,behavior:'smooth'})});sec.appendChild(mais);
  slot.replaceChildren(sec)}
 document.addEventListener('app:page',e=>{cur=e.detail;if(M)cards();if(M&&!pan.hidden){uf=cur?cur.uf:uf;cargo=cur?cur.cargo:cargo;if(fi){montar();lista()}}});
 M=window.__MAN||null;if(M)cards();else load(root+'data/manifest.js').then(()=>{M=window.__MAN;cards()}).catch(()=>{});

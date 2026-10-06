@@ -353,3 +353,13 @@ nav.top .swp a.row[aria-current]{background:color-mix(in srgb,var(--ink) 4%,tran
  td.wrap{min-width:150px}
  .search{max-width:none}
 }
+
+/* v19: quarto card (outros candidatos) */
+.dest{grid-template-columns:repeat(4,minmax(0,200px))}
+button.dcard.mais{font:inherit;cursor:pointer;padding:0;text-align:left;border:1.5px dashed color-mix(in srgb,var(--red) 45%,transparent);background:transparent}
+.dcard.mais::before{opacity:.6}
+.dcard.mais .ph{top:0;align-items:center}
+.dcard.mais .plus{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--red);color:#fff;font-size:38px;font-weight:300;line-height:1;padding-bottom:4px;transition:transform .15s}
+button.dcard.mais:hover{border-color:var(--red)}button.dcard.mais:hover .plus{transform:scale(1.08)}
+.dcard.mais .tx{border-top:1px solid var(--line)}
+@media (max-width:600px){.dest{grid-template-columns:repeat(4,minmax(0,1fr))}.dcard.mais .plus{width:40px;height:40px;font-size:26px}}
