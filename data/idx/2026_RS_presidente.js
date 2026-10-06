@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_RS_presidente"]=[[22,"22",3573783,1]];

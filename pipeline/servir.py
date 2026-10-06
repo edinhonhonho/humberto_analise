@@ -76,9 +76,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                     raise ValueError
             except (KeyError, ValueError):
                 return self._json({"ok": False, "erro": "Pedido inválido."}, 400)
-            rel = f"{ano}/{uf.lower()}/{cargo}/{num}/index.html"
+            rel = f"data/c/{ano}/{uf.lower()}/{cargo}/{num}.js"
             if (raiz / rel).exists():
-                return self._json({"ok": True, "url": rel})
+                return self._json({"ok": True, "url": f"index.html?c={ano}/{uf.lower()}/{cargo}/{num}"})
             with travas_lock:
                 trava = travas.setdefault((ano, uf, cargo, num), threading.Lock())
             with trava, trava_geral:
@@ -90,7 +90,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                     if not (raiz / rel).exists():
                         fim = (r.stdout + r.stderr).strip().splitlines()[-3:]
                         return self._json({"ok": False, "erro": "Não consegui gerar: " + " | ".join(fim)})
-            return self._json({"ok": True, "url": rel})
+            return self._json({"ok": True, "url": f"index.html?c={ano}/{uf.lower()}/{cargo}/{num}"})
         return super().do_GET()
 
     def log_message(self, fmt, *a):

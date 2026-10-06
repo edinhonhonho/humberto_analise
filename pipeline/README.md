@@ -120,21 +120,24 @@ Cada seção é conferida: a soma dos votos tem de bater com o comparecimento.
 - **Distância dos redutos**: distância em linha reta ao mais próximo dos 5 municípios com mais votos e queda da votação por faixa.
 - Nomes e siglas dos candidatos vêm de `dados/candidatos_ANO_UF.csv` (gerado por `python baixar_bu.py --so-candidatos`) ou do `consulta_cand` do TSE.
 
-## Site em pastas (padrão a partir desta versão)
+## Site estático (uma página, um arquivo de dados por candidato)
 
-`python rodar.py` grava, além do `dashboard.html` (arquivo único, para uso offline), um site estático em
-`site/` ao lado de `saida_ANO/`:
+`python rodar.py` grava, além do `dashboard.html` (arquivo único, offline), um site estático em `site/` ao lado
+de `saida_ANO/`. O site tem uma página só (`index.html`); trocar de candidato apenas busca o arquivo de dados
+dele e redesenha o relatório, sem recarregar:
 
-- `site/index.html`: escolha de ano, UF, cargo e busca de candidato;
-- `site/assets/`: CSS e JS compartilhados (com hash no nome, para cache);
-- `site/data/`: manifesto e índices por ano, UF e cargo (carregados só quando o grupo é escolhido);
-- `site/<ano>/<uf>/<cargo>/<número>/`: relatório de um candidato (`index.html` + `data.js`).
+- `site/index.html?c=<ano>/<uf>/<cargo>/<número>`: a página; sem `?c=` abre o primeiro destaque;
+- `site/assets/`: CSS e JS (versão na URL), `static.js` (textos repetidos), `geo/<UF>_<hash>.js` (traçado dos municípios, um por UF);
+- `site/data/manifest.js`: grupos, destaques e siglas; `data/idx/`: candidatos de cada grupo;
+- `site/data/c/<ano>/<uf>/<cargo>/<número>.js`: dados de um candidato (texto, tabelas, mapas, detalhes).
 
-Cada execução só acrescenta ou atualiza o candidato rodado; os demais permanecem. Para publicar, basta
-enviar a pasta `site/` (qualquer hospedagem estática). Os mapas compartilham a geometria dos municípios
-dentro da página e podem ser clicados; a busca por município e o painel de detalhes usam `data.js`.
-`python rodar.py --relatorio` refaz o site e o dashboard a partir de `saida_ANO/bundle`.
-O texto fixo está em `eleicao/conteudo.py`; estilo e comportamento, em `eleicao/web/`.
+Cada execução só acrescenta ou atualiza o candidato rodado. Para publicar: `python publicar.py` monta
+`site_publicar/` (sem restos de versões antigas); enviar essa pasta para qualquer hospedagem estática.
+`python servir.py` serve o site localmente e gera na hora a análise de quem ainda não tem (botão "gerar análise").
+`python rodar.py --lote` gera a fila (só partidos de `espectros` em `config.json`); `--indice` atualiza as listas;
+`--relatorio` refaz o site e os dashboards a partir de `saida_*/bundle`; `--um UF CARGO NUM` gera um candidato.
+`baixar_nomes.py` baixa os nomes de governador e senador. O texto fixo está em `eleicao/conteudo.py`; estilo e
+comportamento, em `eleicao/web/`.
 
 `baixar_rs_completo.py` baixa os boletins de todos os cargos de uma UF num só CSV.
 

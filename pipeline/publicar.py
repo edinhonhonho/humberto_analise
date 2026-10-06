@@ -22,8 +22,8 @@ def ignorar(pasta, nomes):
             sai.append(n)
         elif pasta.parent == src and re.fullmatch(r"\d{4}", pasta.name) is None and False:
             pass
-        elif pasta.parent.parent == src and re.fullmatch(r"\d{4}", pasta.parent.name) and re.fullmatch(r"\d+", n):
-            sai.append(n)   # site/ANO/UF/<número do cargo>: formato antigo
+        elif pasta == src and re.fullmatch(r"\d{4}", n):
+            sai.append(n)   # site/<ano>/...: uma página por candidato (formato antigo)
         elif pasta.name == "idx" and re.fullmatch(r"\d{4}_[A-Z]{2}_\d+\.(js|json)", n):
             sai.append(n)   # índice antigo por número de cargo
     return sai

@@ -1,1 +1,1 @@
-(window.__IDX=window.__IDX||{})["2026_PE_governador"]=[[55,"Candidato 55",2805438,0],[40,"Candidato 40",2360469,1],[50,"Candidato 50",77699,1],[14,"Candidato 14",18340,0],[80,"Candidato 80",3495,1],[16,"Candidato 16",987,1],[29,"Candidato 29",424,1]];
+(window.__IDX=window.__IDX||{})["2026_PE_governador"]=[[55,"Raquel Lyra",2805438,0],[40,"João Campos",2360469,1],[50,"Ivan Moraes",77699,1],[14,"Renan",18340,0],[80,"Professora Camila",3495,1],[16,"Guilherme Fonseca",987,1],[29,"Victor Assis",424,1]];
