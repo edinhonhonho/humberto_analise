@@ -217,7 +217,7 @@ def main(argv=None):
                     out / "geo/hexagonos_h3.gpkg", "hexagonos")
 
     ctx = {"info": info, "ano": a.ano, "uf": a.uf, "cargo": a.cargo,
-           "cargo_nome": tse_io.CARGOS_PROPORCIONAIS.get(a.cargo, f"Cargo {a.cargo}"),
+           "cargo_nome": {1: "Presidente", 3: "Governador", 5: "Senador", 6: "Deputado Federal", 7: "Deputado Estadual"}.get(a.cargo, f"Cargo {a.cargo}"),
            "conc": conc, "moran": moran, "municipal": g, "pct_estado": pct_estado, "gm": gm,
            "pareto": pareto, "cidades": cidades, "colegas": colegas, "regioes": regioes,
            "despesas": desp, "cob_coord": cob_coord, "comparacao": comp, "analises": anal,

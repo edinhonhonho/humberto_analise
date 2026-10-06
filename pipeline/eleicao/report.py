@@ -191,7 +191,7 @@ def montar(ctx: dict) -> dict:
     a(GUIA.replace("</dl></details>", (GUIA_HEX if tem_hex else "") + "</dl></details>"))
 
     # ---- 1. Panorama
-    proj = svgviz.Proj(gm.total_bounds, 760)
+    proj = svgviz.Proj(svgviz.bounds_principais(gm), 760)
     gm = gm.copy()
     gm["nm"] = gm["NM_MUNICIPIO"].map(nome_pt)
     polys, c_v, c_p, c_q = [], None, None, None
@@ -217,13 +217,13 @@ def montar(ctx: dict) -> dict:
                  "o município vota nele mais do que a média."},
     ]
     a('<h2 id="panorama"><span class="n">1</span>Panorama estadual</h2>')
-    a('<p class="lead">Passe o mouse (ou toque) em um município para ver os números. Os três botões trocam o que o mapa '
+    a('<p class="lead">Passe o mouse em um município para ver os números e <b>clique nele para abrir um card com os detalhes</b>. Os três botões trocam o que o mapa '
       'mostra: volume de votos, força proporcional e onde ele é mais forte que a média do estado.</p>')
     a(svgviz.geo_defs(polys))
     a('<div class="card"><div class="msearch"><input type="search" id="msq" placeholder="Buscar município pelo nome" '
       'autocomplete="off" role="combobox" aria-expanded="false" aria-controls="msl" aria-label="Buscar município pelo nome">'
       '<ul id="msl" role="listbox" hidden></ul></div>'
-      '<p class="mhint">Clique em um município, em qualquer mapa, para abrir os detalhes.</p>' + svgviz.map_card("mapa-estado", polys, metr, proj,
+      '<p class="mhint dica"><span>Clique em um município, em qualquer mapa, para ver os detalhes dele: <b>votos, posição, mais votados e indicadores</b>.</span></p>' + svgviz.map_card("mapa-estado", polys, metr, proj,
                                             aria="Mapa de votos por município") + "</div>")
 
     top = mun.head(30).copy()

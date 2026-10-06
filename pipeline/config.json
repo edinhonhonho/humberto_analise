@@ -50,5 +50,5 @@
   "espectros": ["esquerda"],
   "votos_minimos": {"6": 500, "7": 500},
   "permutacoes_lote": 99,
-  "top_cidades_lote": 0
+  "top_cidades_lote": 3
 }

@@ -51,17 +51,45 @@ class Proj:
         return (self.pad + (lon - self.minx) * self.k * self.s, self.pad + (self.maxy - lat) * self.s)
 
 
-def _ring(coords, proj: Proj) -> str:
+def bounds_principais(gdf, frac: float = 0.01):
+    """Limites do território principal: ignora partes minúsculas e afastadas (ilhas como Fernando de
+    Noronha), que de outro modo encolhem o estado e o empurram para um canto do mapa."""
+    partes = []
+    for g in gdf.geometry:
+        if g is None or g.is_empty:
+            continue
+        partes += [g] if g.geom_type == "Polygon" else [x for x in getattr(g, "geoms", []) if x.geom_type == "Polygon"]
+    if not partes:
+        return tuple(gdf.total_bounds)
+    mx = max(p.area for p in partes)
+    graudas = [p for p in partes if p.area >= frac * mx] or partes
+    bs = [p.bounds for p in graudas]
+    return (min(b[0] for b in bs), min(b[1] for b in bs), max(b[2] for b in bs), max(b[3] for b in bs))
+
+
+def _ring(coords, proj: Proj, dx: float = 0.0, dy: float = 0.0) -> str:
     pts, last = [], None
     for lon, lat in coords:
         x, y = proj.xy(lon, lat)
-        p = (round(x, 1), round(y, 1))
+        p = (round(x + dx, 1), round(y + dy, 1))
         if p != last:
             pts.append(p)
             last = p
     if len(pts) < 3:
         return ""
     return "M" + "L".join(f"{x:g} {y:g}" for x, y in pts) + "Z"
+
+
+def _deslocamento(poly, proj: Proj, m: float = 10.0):
+    """Partes fora da área do mapa (ilhas distantes) são trazidas para dentro, junto à borda mais próxima."""
+    xs, ys = zip(*(proj.xy(lon, lat) for lon, lat in poly.exterior.coords))
+    x0, x1, y0, y1 = min(xs), max(xs), min(ys), max(ys)
+    if x0 >= 0 and x1 <= proj.W and y0 >= 0 and y1 <= proj.H:
+        return 0.0, 0.0
+    w, h = x1 - x0, y1 - y0
+    nx = min(max(x0, m), max(proj.W - m - w, m))
+    ny = min(max(y0, m), max(proj.H - m - h, m))
+    return nx - x0, ny - y0
 
 
 def geom_path(geom, proj: Proj) -> str:
@@ -74,8 +102,9 @@ def geom_path(geom, proj: Proj) -> str:
         polys = [g for g in geom.geoms if g.geom_type == "Polygon"]
     parts = []
     for p in polys:
-        parts.append(_ring(p.exterior.coords, proj))
-        parts += [_ring(r.coords, proj) for r in p.interiors]
+        dx, dy = _deslocamento(p, proj)
+        parts.append(_ring(p.exterior.coords, proj, dx, dy))
+        parts += [_ring(r.coords, proj, dx, dy) for r in p.interiors]
     return "".join(x for x in parts if x)
 
 

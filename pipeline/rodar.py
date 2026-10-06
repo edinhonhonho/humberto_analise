@@ -143,11 +143,13 @@ def main():
 
     if "--relatorio" in argv:  # refaz só o site e os dashboards a partir dos pacotes já calculados (segundos)
         from eleicao import report
-        if (saida / "bundle" / "meta.json").exists():
+        if not so and (saida / "bundle" / "meta.json").exists():
             dash = report.build_from_bundle(saida / "bundle", saida / "dashboard.html", site_dir)
             print(f"Dashboard refeito: {dash}")
         lote = saida.resolve().parent / (saida.name + "_lote")
         for b in sorted(lote.glob("*/bundle")) if lote.exists() else []:
+            if so and b.parent.name.split("_")[0] not in ufs:
+                continue
             report.build_from_bundle(b, b.parent / "dashboard.html", site_dir)
             print(f"  refeito: {b.parent.name}")
         return 0

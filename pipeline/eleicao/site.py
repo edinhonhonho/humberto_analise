@@ -313,6 +313,12 @@ def _destaques(raiz: Path) -> list[dict]:
 
 def _publicar(raiz: Path, man: dict, a: dict, icon: str, fav: str) -> None:
     man["destaques"] = _destaques(raiz)
+    try:
+        from . import partidos as _p
+        man["partidos"] = {str(k): v["sigla"] for k, v in _p._espectros().items()}
+        man["espectro"] = {str(k): v["espectro"] for k, v in _p._espectros().items()}
+    except Exception:  # noqa: BLE001
+        pass
     _gravar_dados(raiz, "manifest", "__MAN", None, man)
     _entrada(raiz, man, a, icon, fav)
 
