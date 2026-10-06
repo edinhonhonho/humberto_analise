@@ -334,6 +334,7 @@ def _destaques(raiz: Path) -> list[dict]:
 
 def _publicar(raiz: Path, man: dict, a: dict, icon: str, fav: str) -> None:
     man["destaques"] = _destaques(raiz)
+    man["prontos"] = sum(1 for g in man.get("grupos", []) for r in _ler_idx(raiz, g["ano"], g["uf"], g["cargo"]) if len(r) > 3 and r[3])
     try:
         from . import partidos as _p
         man["partidos"] = {str(k): v["sigla"] for k, v in _p._espectros().items()}
