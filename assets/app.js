@@ -215,9 +215,15 @@ function calcular(key,aoEtapa){return new Promise((ok,err)=>{
   aoEtapa(m.P,m.etapa);if(m.final){delete espera[id];ok(m.P)}};
  worker().postMessage({tipo:'calcular',id,base:new URL(ROOT+'data/br',location.href).href,ano:+ano,uf:uf.toUpperCase(),cargo,turno:1,numero:+num})})}
 
+const partidoDe=n=>{n=Math.trunc(Number(n));if(n<100)return n;if(n<1000)return Math.floor(n/10);if(n<10000)return Math.floor(n/100);return Math.floor(n/1000)};
+let manP=null;
+async function bloqueado(key){const num=key.split('/')[3];
+ if(!manP){manP=window.__MAN?Promise.resolve(window.__MAN):fetch(ROOT+'data/manifest.json').then(r=>r.json()).catch(()=>({}))}
+ const m=await manP;return !!m.espectro&&m.espectro[String(partidoDe(num))]==='direita'}
 const App=window.App={atual:null,
  pre(key){},
  async ir(key,o){o=o||{};const my=++seq;cancelar();indo();let primeira=true,P=cacheP[key];
+  if(await bloqueado(key)){if(my!==seq)return;document.title='Análise indisponível';app.innerHTML='<p class="carregando">A análise de candidatos de partidos de direita não está disponível neste site. Escolha outro candidato em <b>Trocar candidato</b>.</p>';return}
   const publicar=(Pn,et)=>{if(my!==seq)return;
    if(primeira){
     if(o.push!==false){const u=new URL(location.href);u.search='?c='+key;u.hash='';

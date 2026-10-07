@@ -55,10 +55,10 @@ async function lista(){const g=GR().find(g=>g.uf===uf&&g.cargo===cargo);ul.repla
  const k=g.ano+'_'+g.uf+'_'+g.cargo_slug;
  if(!cache[k]){try{await load(root+'data/idx/'+k+'.js?'+Date.now());cache[k]=(window.__IDX||{})[k]||[]}catch(_){cache[k]=[]}}
  const t=norm(q.value.trim()),todos=ck.checked,P=(M.partidos||{});
- const sig=n=>{let s=String(n);const d=s.length;const p=d>=2?s.slice(0,2):s;return P[p]||''};
- const rows=cache[k].filter(r=>!t||norm(r[1]).includes(t)||String(r[0]).startsWith(t));
- const prontos=cache[k].filter(r=>r[3]).length;
- info.textContent=t?rows.length+' resultado(s)':cache[k].length.toLocaleString('pt-BR')+' candidatos';
+ const sig=n=>{let s=String(n);const d=s.length;const p=d>=2?s.slice(0,2):s;return P[p]||''};const dir=n=>((M.espectro||{})[String(n).slice(0,2)])==='direita';
+ const rows=cache[k].filter(r=>!dir(r[0])).filter(r=>!t||norm(r[1]).includes(t)||String(r[0]).startsWith(t));
+ 
+ info.textContent=t?rows.length+' resultado(s)':rows.length.toLocaleString('pt-BR')+' candidatos';
  if(!rows.length){ul.appendChild(mk('li','vazio','Nenhum candidato encontrado.'));return}
  rows.slice(0,mostrar).forEach(r=>{const li=mk('li'),ok=true;let a;
   if(ok||LOCAL){a=mk('a','row');a.href=ok?pagina(g.ano,g.uf,g.cargo_slug,r[0]):gerar(g.ano,g.uf,g.cargo_slug,r[0],r[1]);if(ok)liga(a,chave(g.ano,g.uf,g.cargo_slug,r[0]))}
