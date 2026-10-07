@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_RR_governador"]=[[22,"Arthur Henrique",220809,1],[10,"Soldado Sampaio",93434,1],[50,"Rosi Aires",4880,1],[77,"Farah Mesquita",213,1],[29,"Clébio Genuíno",77,1]];

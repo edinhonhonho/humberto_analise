@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_BA_senador"]=[[133,"Rui Costa",4335196,1],[130,"Jaques Wagner",3986690,1],[100,"Angelo Coronel",2898885,1],[222,"João Roma",2879443,1],[500,"Professora Delliana",215190,1],[180,"Marcelo Carvalho",50929,1],[333,"Carlos Sodré",21374,1],[277,"Marcelo Santtana",13173,1],[800,"Gregorio Gould",12609,1],[290,"Marcelo Millet",4920,1]];

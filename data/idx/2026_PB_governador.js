@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_PB_governador"]=[[11,"Lucas Ribeiro",1470252,1],[22,"Efraim Filho",552836,1],[15,"Cícero Lucena",252884,1],[80,"Yuri Ezequiel",8272,1],[29,"Camilo Duarte",2378,1],[27,"Pedro Coutinho",590,1]];

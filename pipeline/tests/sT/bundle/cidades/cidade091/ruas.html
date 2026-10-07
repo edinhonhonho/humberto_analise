@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_1b37bc8f2208fe55066899472d40bf78 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    
+                    <style>
+                        .foliumtooltip {
+                            
+                        }
+                       .foliumtooltip table{
+                            margin: auto;
+                        }
+                        .foliumtooltip tr{
+                            text-align: left;
+                        }
+                        .foliumtooltip th{
+                            padding: 2px; padding-right: 8px;
+                        }
+                    </style>
+            
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_1b37bc8f2208fe55066899472d40bf78" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_1b37bc8f2208fe55066899472d40bf78 = L.map(
+                "map_1b37bc8f2208fe55066899472d40bf78",
+                {
+                    center: [-29.43916602083333, -53.16780319791666],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 12,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_1b37bc8f2208fe55066899472d40bf78);
+
+            
+
+        
+    
+            var tile_layer_b6e0ece2956e6ffff3074d6b9d1eea5f = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_b6e0ece2956e6ffff3074d6b9d1eea5f.addTo(map_1b37bc8f2208fe55066899472d40bf78);
+        
+    
+        function geo_json_eab742fa6f799a83aa0ff34ed05c02fa_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"color": "#52514e", "fillOpacity": 0, "weight": 1.2};
+            }
+        }
+
+        function geo_json_eab742fa6f799a83aa0ff34ed05c02fa_onEachFeature(feature, layer) {
+
+            layer.on({
+            });
+        };
+        var geo_json_eab742fa6f799a83aa0ff34ed05c02fa = L.geoJson(null, {
+                onEachFeature: geo_json_eab742fa6f799a83aa0ff34ed05c02fa_onEachFeature,
+            
+                style: geo_json_eab742fa6f799a83aa0ff34ed05c02fa_styler,
+            ...{
+}
+        });
+
+        function geo_json_eab742fa6f799a83aa0ff34ed05c02fa_add (data) {
+            geo_json_eab742fa6f799a83aa0ff34ed05c02fa
+                .addData(data);
+        }
+            geo_json_eab742fa6f799a83aa0ff34ed05c02fa_add({"bbox": [-53.5, -29.708333333333332, -52.833333333333336, -29.166666666666668], "features": [{"bbox": [-53.5, -29.708333333333332, -52.833333333333336, -29.166666666666668], "geometry": {"coordinates": [[[-52.833333333333336, -29.708333333333332], [-52.833333333333336, -29.166666666666668], [-53.5, -29.166666666666668], [-53.5, -29.708333333333332], [-52.833333333333336, -29.708333333333332]]], "type": "Polygon"}, "id": "0", "properties": {}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_eab742fa6f799a83aa0ff34ed05c02fa.addTo(map_1b37bc8f2208fe55066899472d40bf78);
+        
+    
+        function geo_json_41e498ceeeeef0a8fe144f20a8bb6de1_styler(feature) {
+            switch(feature.id) {
+                case "0": case "1": case "2": case "3": case "4": case "6": case "8": case "12": case "13": case "14": case "15": case "16": case "17": case "19": case "20": case "21": case "22": case "24": case "25": case "26": case "28": case "29": case "30": case "31": case "32": case "33": case "34": case "35": case "36": case "37": case "38": case "41": case "42": case "43": case "44": 
+                    return {"color": "#fcfcfb", "fillColor": "#e1e0d9", "fillOpacity": 0.55, "weight": 0.6};
+                case "23": case "39": case "40": 
+                    return {"color": "#fcfcfb", "fillColor": "#eb6834", "fillOpacity": 0.55, "weight": 0.6};
+                default:
+                    return {"color": "#fcfcfb", "fillColor": "#2a78d6", "fillOpacity": 0.55, "weight": 0.6};
+            }
+        }
+
+        function geo_json_41e498ceeeeef0a8fe144f20a8bb6de1_onEachFeature(feature, layer) {
+
+            layer.on({
+            });
+        };
+        var geo_json_41e498ceeeeef0a8fe144f20a8bb6de1 = L.geoJson(null, {
+                onEachFeature: geo_json_41e498ceeeeef0a8fe144f20a8bb6de1_onEachFeature,
+            
+                style: geo_json_41e498ceeeeef0a8fe144f20a8bb6de1_styler,
+            ...{
+}
+        });
+
+        function geo_json_41e498ceeeeef0a8fe144f20a8bb6de1_add (data) {
+            geo_json_41e498ceeeeef0a8fe144f20a8bb6de1
+                .addData(data);
+        }
+            geo_json_41e498ceeeeef0a8fe144f20a8bb6de1_add({"features": [{"geometry": {"coordinates": [[[-53.08336716200961, -29.311630494241058], [-53.05458962497643, -29.294921493261658], [-53.06031675032205, -29.265012968358818], [-53.09481573248177, -29.251818544150108], [-53.123584703977535, -29.268532329096683], [-53.11786326133291, -29.298435750998536], [-53.08336716200961, -29.311630494241058]]], "type": "Polygon"}, "id": "0", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.08, "validos": 369, "votos": 4}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.10641791339482, -29.358202199797013], [-53.077641645676735, -29.341516267100292], [-53.08336716200961, -29.311630494241058], [-53.11786326133291, -29.298435750998536], [-53.14663094775686, -29.315126467834794], [-53.14091111862921, -29.345007140488075], [-53.10641791339482, -29.358202199797013]]], "type": "Polygon"}, "id": "1", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.92, "validos": 676, "votos": 13}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.14663094775686, -29.315126467834794], [-53.11786326133291, -29.298435750998536], [-53.123584703977535, -29.268532329096683], [-53.15806814297546, -29.25532474498642], [-53.18682722443226, -29.272020257296482], [-53.18111147432663, -29.30191855496419], [-53.14663094775686, -29.315126467834794]]], "type": "Polygon"}, "id": "2", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.08, "validos": 1671, "votos": 18}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.04313291248957, -29.35469812127363], [-53.01434683367291, -29.337993892950227], [-53.02007802733577, -29.308103041090842], [-53.05458962497643, -29.294921493261658], [-53.08336716200961, -29.311630494241058], [-53.077641645676735, -29.341516267100292], [-53.04313291248957, -29.35469812127363]]], "type": "Polygon"}, "id": "3", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 0.13, "validos": 748, "votos": 1}, "type": "Feature"}, {"geometry": {"coordinates": [[[-52.956763683033806, -29.30454407821396], [-52.92796663890038, -29.287798495601553], [-52.93370509991487, -29.25787982851435], [-52.968234944711085, -29.24471180118459], [-52.997023502502806, -29.26146214483149], [-52.99129070434896, -29.291375751472582], [-52.956763683033806, -29.30454407821396]]], "type": "Polygon"}, "id": "4", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 0.56, "validos": 709, "votos": 4}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.08924373392894, -29.447750765049875], [-53.06046017154534, -29.431092680478027], [-53.066188150506676, -29.401247368210313], [-53.100694007976415, -29.388065210598977], [-53.12946899702329, -29.404728068015597], [-53.12374670441959, -29.434568306906094], [-53.08924373392894, -29.447750765049875]]], "type": "Polygon"}, "id": "5", "properties": {"gi_classe": "Ponto quente", "pct_validos": 5.62, "validos": 1245, "votos": 70}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.12946899702329, -29.404728068015597], [-53.100694007976415, -29.388065210598977], [-53.10641791339482, -29.358202199797013], [-53.14091111862921, -29.345007140488075], [-53.16967751063292, -29.36167478216701], [-53.16395929691862, -29.391532695606944], [-53.12946899702329, -29.404728068015597]]], "type": "Polygon"}, "id": "6", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.27, "validos": 1732, "votos": 22}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.025941688343245, -29.444261888380044], [-52.997148329284705, -29.427585489839263], [-53.002881984708814, -29.397735125315638], [-53.03740332522469, -29.38456620828868], [-53.066188150506676, -29.401247368210313], [-53.06046017154534, -29.431092680478027], [-53.025941688343245, -29.444261888380044]]], "type": "Polygon"}, "id": "7", "properties": {"gi_classe": "Ponto quente", "pct_validos": 1.41, "validos": 1485, "votos": 21}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.066188150506676, -29.401247368210313], [-53.03740332522469, -29.38456620828868], [-53.04313291248957, -29.35469812127363], [-53.077641645676735, -29.341516267100292], [-53.10641791339482, -29.358202199797013], [-53.100694007976415, -29.388065210598977], [-53.066188150506676, -29.401247368210313]]], "type": "Polygon"}, "id": "8", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.5, "validos": 2133, "votos": 32}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.11229965529752, -29.494208295258932], [-53.083517365175204, -29.47757329282654], [-53.08924373392894, -29.447750765049875], [-53.12374670441959, -29.434568306906094], [-53.15252040544001, -29.45120808220377], [-53.146799727549755, -29.481025539487625], [-53.11229965529752, -29.494208295258932]]], "type": "Polygon"}, "id": "9", "properties": {"gi_classe": "Ponto quente", "pct_validos": 4.68, "validos": 1667, "votos": 78}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.15252040544001, -29.45120808220377], [-53.12374670441959, -29.434568306906094], [-53.12946899702329, -29.404728068015597], [-53.16395929691862, -29.391532695606944], [-53.1927243851545, -29.408177255240354], [-53.18700778874845, -29.4380123996614], [-53.15252040544001, -29.45120808220377]]], "type": "Polygon"}, "id": "10", "properties": {"gi_classe": "Ponto quente", "pct_validos": 1.52, "validos": 2243, "votos": 34}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.04900175056, -29.490742788759164], [-53.02020963860331, -29.474089465584857], [-53.025941688343245, -29.444261888380044], [-53.06046017154534, -29.431092680478027], [-53.08924373392894, -29.447750765049875], [-53.083517365175204, -29.47757329282654], [-53.04900175056, -29.490742788759164]]], "type": "Polygon"}, "id": "11", "properties": {"gi_classe": "Ponto quente", "pct_validos": 5.99, "validos": 784, "votos": 47}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.232911565361924, -29.365115898973674], [-53.2041551135359, -29.348466543563948], [-53.20986924563795, -29.318590992292922], [-53.24433412522539, -29.305369935689658], [-53.27308191707358, -29.322024098286033], [-53.2673734917626, -29.351894507028007], [-53.232911565361924, -29.365115898973674]]], "type": "Polygon"}, "id": "12", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.32, "validos": 2128, "votos": 28}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.27308191707358, -29.322024098286033], [-53.24433412522539, -29.305369935689658], [-53.25004417300888, -29.275476783459652], [-53.28449630303144, -29.262242957173655], [-53.31323541139126, -29.278901938336563], [-53.307531075658105, -29.30878992395513], [-53.27308191707358, -29.322024098286033]]], "type": "Polygon"}, "id": "13", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.83, "validos": 327, "votos": 6}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.20986924563795, -29.318590992292922], [-53.18111147432663, -29.30191855496419], [-53.18682722443226, -29.272020257296482], [-53.22129504598185, -29.258799539123885], [-53.25004417300888, -29.275476783459652], [-53.24433412522539, -29.305369935689658], [-53.20986924563795, -29.318590992292922]]], "type": "Polygon"}, "id": "14", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 0.83, "validos": 1199, "votos": 10}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.25595417615626, -29.41159496064351], [-53.22719905315448, -29.39496869393197], [-53.232911565361924, -29.365115898973674], [-53.2673734917626, -29.351894507028007], [-53.29611993910086, -29.368525581056407], [-53.29041313814803, -29.39837323644289], [-53.25595417615626, -29.41159496064351]]], "type": "Polygon"}, "id": "15", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.49, "validos": 1277, "votos": 19}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.29611993910086, -29.368525581056407], [-53.2673734917626, -29.351894507028007], [-53.27308191707358, -29.322024098286033], [-53.307531075658105, -29.30878992395513], [-53.33626882384631, -29.325425816733336], [-53.3305661150369, -29.355291061829128], [-53.29611993910086, -29.368525581056407]]], "type": "Polygon"}, "id": "16", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 0.3, "validos": 335, "votos": 1}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.1927243851545, -29.408177255240354], [-53.16395929691862, -29.391532695606944], [-53.16967751063292, -29.36167478216701], [-53.2041551135359, -29.348466543563948], [-53.232911565361924, -29.365115898973674], [-53.22719905315448, -29.39496869393197], [-53.1927243851545, -29.408177255240354]]], "type": "Polygon"}, "id": "17", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.17, "validos": 3429, "votos": 40}, "type": "Feature"}, {"geometry": {"coordinates": [[[-52.96261440804887, -29.440741421767317], [-52.93381131715529, -29.42404670470301], [-52.93955063909249, -29.394191309073815], [-52.974087387919695, -29.381035658307155], [-53.002881984708814, -29.397735125315638], [-52.997148329284705, -29.427585489839263], [-52.96261440804887, -29.440741421767317]]], "type": "Polygon"}, "id": "18", "properties": {"gi_classe": "Ponto quente", "pct_validos": 1.43, "validos": 558, "votos": 8}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.002881984708814, -29.397735125315638], [-52.974087387919695, -29.381035658307155], [-52.979822647118596, -29.351162516257173], [-53.01434683367291, -29.337993892950227], [-53.04313291248957, -29.35469812127363], [-53.03740332522469, -29.38456620828868], [-53.002881984708814, -29.397735125315638]]], "type": "Polygon"}, "id": "19", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 0.58, "validos": 2245, "votos": 13}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.1814693724831, -29.633305525513602], [-53.15269095531378, -29.61673980866054], [-53.158412482035054, -29.586985691234407], [-53.19290672404176, -29.573802348920175], [-53.22167650485977, -29.5903728384067], [-53.21596068248743, -29.62012189428269], [-53.1814693724831, -29.633305525513602]]], "type": "Polygon"}, "id": "20", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 2.43, "validos": 536, "votos": 13}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.22167650485977, -29.5903728384067], [-53.19290672404176, -29.573802348920175], [-53.19862416681483, -29.544030483301416], [-53.23310568321559, -29.530834189386805], [-53.26186680407145, -29.54740946313527], [-53.25615507094453, -29.577176243252126], [-53.22167650485977, -29.5903728384067]]], "type": "Polygon"}, "id": "21", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 0.98, "validos": 1120, "votos": 11}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.204526571035714, -29.679579430186045], [-53.175749463570895, -29.663036821056565], [-53.1814693724831, -29.633305525513602], [-53.21596068248743, -29.62012189428269], [-53.244729137866656, -29.636669275871274], [-53.23901493778781, -29.66639551294074], [-53.204526571035714, -29.679579430186045]]], "type": "Polygon"}, "id": "22", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 0.6, "validos": 502, "votos": 3}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.428404973553285, -29.511062811819684], [-53.39967275926379, -29.494519338200966], [-53.405370576026435, -29.464722372953123], [-53.43979487006357, -29.45147405344753], [-53.46851829930355, -29.468022357670893], [-53.462826221965976, -29.49781414754], [-53.428404973553285, -29.511062811819684]]], "type": "Polygon"}, "id": "23", "properties": {"gi_classe": "Ponto frio", "pct_validos": 0.51, "validos": 583, "votos": 3}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.34812738106001, -29.59705243438722], [-53.31937766672541, -29.580518587106734], [-53.32508368047419, -29.550756913385765], [-53.359533681931126, -29.53753421093654], [-53.38827465793809, -29.554072865564194], [-53.38257437324432, -29.583829412024365], [-53.34812738106001, -29.59705243438722]]], "type": "Polygon"}, "id": "24", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 0.67, "validos": 742, "votos": 5}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.135355907152935, -29.54061994262078], [-53.10657489865399, -29.52400802895952], [-53.11229965529752, -29.494208295258932], [-53.146799727549755, -29.481025539487625], [-53.17557213118928, -29.497642225985622], [-53.169853069909735, -29.527436892126197], [-53.135355907152935, -29.54061994262078]]], "type": "Polygon"}, "id": "25", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.8, "validos": 1113, "votos": 20}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.03180796049681, -29.58011654261547], [-53.00300856344749, -29.563491051383878], [-53.00874307621697, -29.533704054911542], [-53.04327130841217, -29.52054756901168], [-53.07206216389652, -29.537177810078934], [-53.06633333124721, -29.56695978390416], [-53.03180796049681, -29.58011654261547]]], "type": "Polygon"}, "id": "26", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 0.88, "validos": 1939, "votos": 17}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.07206216389652, -29.537177810078934], [-53.04327130841217, -29.52054756901168], [-53.04900175056, -29.490742788759164], [-53.083517365175204, -29.47757329282654], [-53.11229965529752, -29.494208295258932], [-53.10657489865399, -29.52400802895952], [-53.07206216389652, -29.537177810078934]]], "type": "Polygon"}, "id": "27", "properties": {"gi_classe": "Ponto quente", "pct_validos": 2.99, "validos": 2812, "votos": 84}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.11818401407499, -29.629910151624294], [-53.08939569964365, -29.61332609436248], [-53.0951229208895, -29.583566936281507], [-53.129632764520736, -29.57039687281859], [-53.158412482035054, -29.586985691234407], [-53.15269095531378, -29.61673980866054], [-53.11818401407499, -29.629910151624294]]], "type": "Polygon"}, "id": "28", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.12, "validos": 446, "votos": 5}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.158412482035054, -29.586985691234407], [-53.129632764520736, -29.57039687281859], [-53.135355907152935, -29.54061994262078], [-53.169853069909735, -29.527436892126197], [-53.19862416681483, -29.544030483301416], [-53.19290672404176, -29.573802348920175], [-53.158412482035054, -29.586985691234407]]], "type": "Polygon"}, "id": "29", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 0.53, "validos": 376, "votos": 2}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.054873201618065, -29.626483123102926], [-53.02607505460573, -29.609880720427384], [-53.03180796049681, -29.58011654261547], [-53.06633333124721, -29.56695978390416], [-53.0951229208895, -29.583566936281507], [-53.08939569964365, -29.61332609436248], [-53.054873201618065, -29.626483123102926]]], "type": "Polygon"}, "id": "30", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.02, "validos": 295, "votos": 3}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.23881903932645, -29.501044611785428], [-53.2100565866654, -29.48444623627484], [-53.215771563869815, -29.45463387051943], [-53.25024328573294, -29.441424989532056], [-53.27899707057251, -29.458028160924254], [-53.273287803821354, -29.487835414144662], [-53.23881903932645, -29.501044611785428]]], "type": "Polygon"}, "id": "31", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.7, "validos": 1058, "votos": 18}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.27899707057251, -29.458028160924254], [-53.25024328573294, -29.441424989532056], [-53.25595417615626, -29.41159496064351], [-53.29041313814803, -29.39837323644289], [-53.3191582316462, -29.414981215232903], [-53.3134530569357, -29.444806107555294], [-53.27899707057251, -29.458028160924254]]], "type": "Polygon"}, "id": "32", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 0.78, "validos": 2565, "votos": 20}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.17557213118928, -29.497642225985622], [-53.146799727549755, -29.481025539487625], [-53.15252040544001, -29.45120808220377], [-53.18700778874845, -29.4380123996614], [-53.215771563869815, -29.45463387051943], [-53.2100565866654, -29.48444623627484], [-53.17557213118928, -29.497642225985622]]], "type": "Polygon"}, "id": "33", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.83, "validos": 2953, "votos": 54}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.215771563869815, -29.45463387051943], [-53.18700778874845, -29.4380123996614], [-53.1927243851545, -29.408177255240354], [-53.22719905315448, -29.39496869393197], [-53.25595417615626, -29.41159496064351], [-53.25024328573294, -29.441424989532056], [-53.215771563869815, -29.45463387051943]]], "type": "Polygon"}, "id": "34", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.11, "validos": 1884, "votos": 21}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.26186680407145, -29.54740946313527], [-53.23310568321559, -29.530834189386805], [-53.23881903932645, -29.501044611785428], [-53.273287803821354, -29.487835414144662], [-53.30204024116168, -29.504415483753938], [-53.296332599969205, -29.534199951865922], [-53.26186680407145, -29.54740946313527]]], "type": "Polygon"}, "id": "35", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 0.78, "validos": 3093, "votos": 24}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.30204024116168, -29.504415483753938], [-53.273287803821354, -29.487835414144662], [-53.27899707057251, -29.458028160924254], [-53.3134530569357, -29.444806107555294], [-53.34219678726461, -29.461390984594292], [-53.336493240679076, -29.491193104302393], [-53.30204024116168, -29.504415483753938]]], "type": "Polygon"}, "id": "36", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 0.67, "validos": 1485, "votos": 10}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.19862416681483, -29.544030483301416], [-53.169853069909735, -29.527436892126197], [-53.17557213118928, -29.497642225985622], [-53.2100565866654, -29.48444623627484], [-53.23881903932645, -29.501044611785428], [-53.23310568321559, -29.530834189386805], [-53.19862416681483, -29.544030483301416]]], "type": "Polygon"}, "id": "37", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.48, "validos": 1760, "votos": 26}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.3191582316462, -29.414981215232903], [-53.29041313814803, -29.39837323644289], [-53.29611993910086, -29.368525581056407], [-53.3305661150369, -29.355291061829128], [-53.35930249373124, -29.371903859502872], [-53.35360141372585, -29.40174635425692], [-53.3191582316462, -29.414981215232903]]], "type": "Polygon"}, "id": "38", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 0.61, "validos": 661, "votos": 4}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.405370576026435, -29.464722372953123], [-53.37663696428247, -29.448155785016358], [-53.3823364136051, -29.418336050264347], [-53.41676374207836, -29.405088078738657], [-53.445488584378396, -29.421659497240537], [-53.43979487006357, -29.45147405344753], [-53.405370576026435, -29.464722372953123]]], "type": "Polygon"}, "id": "39", "properties": {"gi_classe": "Ponto frio", "pct_validos": 1.28, "validos": 704, "votos": 9}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.34219678726461, -29.461390984594292], [-53.3134530569357, -29.444806107555294], [-53.3191582316462, -29.414981215232903], [-53.35360141372585, -29.40174635425692], [-53.3823364136051, -29.418336050264347], [-53.37663696428247, -29.448155785016358], [-53.34219678726461, -29.461390984594292]]], "type": "Polygon"}, "id": "40", "properties": {"gi_classe": "Ponto frio", "pct_validos": 0.95, "validos": 944, "votos": 9}, "type": "Feature"}, {"geometry": {"coordinates": [[[-52.94539878364478, -29.53019864660534], [-52.91658842862332, -29.513531736525636], [-52.92233021198136, -29.48371692630848], [-52.956876687254855, -29.470574027306746], [-52.98567855624555, -29.487245675890467], [-52.979942438507926, -29.517055481658055], [-52.94539878364478, -29.53019864660534]]], "type": "Polygon"}, "id": "41", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.22, "validos": 328, "votos": 4}, "type": "Feature"}, {"geometry": {"coordinates": [[[-52.88202942606798, -29.526661554899217], [-52.85320941879722, -29.50997630349397], [-52.858956857751544, -29.480156509921294], [-52.89351865090828, -29.46702694778828], [-52.92233021198136, -29.48371692630848], [-52.91658842862332, -29.513531736525636], [-52.88202942606798, -29.526661554899217]]], "type": "Polygon"}, "id": "42", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 0.8, "validos": 624, "votos": 5}, "type": "Feature"}, {"geometry": {"coordinates": [[[-52.96846774029049, -29.576634479554453], [-52.93965860070691, -29.559990644715924], [-52.94539878364478, -29.53019864660534], [-52.979942438507926, -29.517055481658055], [-53.00874307621697, -29.533704054911542], [-53.00300856344749, -29.563491051383878], [-52.96846774029049, -29.576634479554453]]], "type": "Polygon"}, "id": "43", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 1.32, "validos": 378, "votos": 5}, "type": "Feature"}, {"geometry": {"coordinates": [[[-53.00874307621697, -29.533704054911542], [-52.979942438507926, -29.517055481658055], [-52.98567855624555, -29.487245675890467], [-53.02020963860331, -29.474089465584857], [-53.04900175056, -29.490742788759164], [-53.04327130841217, -29.52054756901168], [-53.00874307621697, -29.533704054911542]]], "type": "Polygon"}, "id": "44", "properties": {"gi_classe": "N\u00e3o significativo", "pct_validos": 4.68, "validos": 555, "votos": 26}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+    geo_json_41e498ceeeeef0a8fe144f20a8bb6de1.bindTooltip(
+    function(layer){
+    let div = L.DomUtil.create('div');
+    
+    let handleObject = feature => {
+        if (feature === null) {
+            return '';
+        } else if (typeof(feature)=='object') {
+            return JSON.stringify(feature);
+        } else {
+            return feature;
+        }
+    }
+    let fields = ["gi_classe", "votos", "validos", "pct_validos"];
+    let aliases = ["Classe", "Votos", "Votos v\u00e1lidos", "% v\u00e1lidos"];
+    let table = '<table>' +
+        String(
+        fields.map(
+        (v,i)=>
+        `<tr>
+            <th>${aliases[i]}</th>
+            
+            <td>${handleObject(layer.feature.properties[v])}</td>
+        </tr>`).join(''))
+    +'</table>';
+    div.innerHTML=table;
+    
+    return div
+    }
+    ,{
+  "sticky": true,
+  "className": "foliumtooltip",
+});
+                     
+    
+            geo_json_41e498ceeeeef0a8fe144f20a8bb6de1.addTo(map_1b37bc8f2208fe55066899472d40bf78);
+        
+    
+            var feature_group_ef29e195a95f13259582f56f89b106da = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_219a070ced558a9b773898b497dd661b = L.circleMarker(
+                [-29.443385, -53.093918],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_219a070ced558a9b773898b497dd661b.bindTooltip(
+                `<div>
+                     <b>ESCOLA 039 CIDADE 0</b><br>BAIRRO B1<br>52 votos · 6,3% dos válidos<br>1070 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bee022fbeb8d91bf001707188a70d30c = L.circleMarker(
+                [-29.442359, -53.044183],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.457790618260848, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_bee022fbeb8d91bf001707188a70d30c.bindTooltip(
+                `<div>
+                     <b>ESCOLA 054 CIDADE 0</b><br>BAIRRO B1<br>47 votos · 6,0% dos válidos<br>989 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_eebc6850663ab9bbc8f88c2b9540b70f = L.circleMarker(
+                [-29.454277, -53.129492],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.232865603609698, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_eebc6850663ab9bbc8f88c2b9540b70f.bindTooltip(
+                `<div>
+                     <b>ESCOLA 097 CIDADE 0</b><br>BAIRRO B1<br>45 votos · 5,3% dos válidos<br>1102 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_12cbffe7b43ceb909b78561639d7db58 = L.circleMarker(
+                [-29.451036, -53.148763],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.762902574972607, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_12cbffe7b43ceb909b78561639d7db58.bindTooltip(
+                `<div>
+                     <b>ESCOLA 094 CIDADE 0</b><br>BAIRRO B1<br>33 votos · 4,1% dos válidos<br>1053 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c8c9f6b9d7da5e07e0627a87536556c2 = L.circleMarker(
+                [-29.508956, -53.064222],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.214667931862445, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_c8c9f6b9d7da5e07e0627a87536556c2.bindTooltip(
+                `<div>
+                     <b>ESCOLA 093 CIDADE 0</b><br>BAIRRO B1<br>29 votos · 3,0% dos válidos<br>1203 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f479f86e64aeaff7e1c6ab0ae3506306 = L.circleMarker(
+                [-29.497269, -53.034109],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.778174593052023, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_f479f86e64aeaff7e1c6ab0ae3506306.bindTooltip(
+                `<div>
+                     <b>ESCOLA 000 CIDADE 0</b><br>BAIRRO B1<br>26 votos · 4,7% dos válidos<br>694 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bd0f51aa61fdfb4007133925d78ec7eb = L.circleMarker(
+                [-29.526254, -53.071253],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.990378002324668, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_bd0f51aa61fdfb4007133925d78ec7eb.bindTooltip(
+                `<div>
+                     <b>ESCOLA 096 CIDADE 0</b><br>BAIRRO B1<br>21 votos · 2,7% dos válidos<br>971 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e651fa14bc8c694ac59538105f5c04aa = L.circleMarker(
+                [-29.518327, -53.083865],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.649175773096877, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_e651fa14bc8c694ac59538105f5c04aa.bindTooltip(
+                `<div>
+                     <b>ESCOLA 038 CIDADE 0</b><br>BAIRRO B1<br>19 votos · 5,1% dos válidos<br>476 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8b5060e7629f3726e7ed3c8d4a5af3a7 = L.circleMarker(
+                [-29.417113, -53.06573],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.471832459560073, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_8b5060e7629f3726e7ed3c8d4a5af3a7.bindTooltip(
+                `<div>
+                     <b>ESCOLA 061 CIDADE 0</b><br>BAIRRO B2<br>18 votos · 4,3% dos válidos<br>558 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ece204c5046c00a6b20a1ba4fd10526a = L.circleMarker(
+                [-29.384359, -53.073249],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.471832459560073, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_ece204c5046c00a6b20a1ba4fd10526a.bindTooltip(
+                `<div>
+                     <b>ESCOLA 014 CIDADE 0</b><br>BAIRRO B2<br>18 votos · 3,1% dos válidos<br>826 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5c7fddb703780c3c474f647c4e836b85 = L.circleMarker(
+                [-29.520198, -53.050969],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.90794771082532, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_5c7fddb703780c3c474f647c4e836b85.bindTooltip(
+                `<div>
+                     <b>ESCOLA 099 CIDADE 0</b><br>BAIRRO B1<br>15 votos · 2,1% dos válidos<br>918 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_609c46673295104e216ee4bc7605ce67 = L.circleMarker(
+                [-29.456193, -53.174219],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.90794771082532, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_609c46673295104e216ee4bc7605ce67.bindTooltip(
+                `<div>
+                     <b>ESCOLA 001 CIDADE 0</b><br>BAIRRO A1<br>15 votos · 2,6% dos válidos<br>781 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_10d31b052ee60cd6ad040a7a6706d87f = L.circleMarker(
+                [-29.526725, -53.157567],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.707619738290479, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_10d31b052ee60cd6ad040a7a6706d87f.bindTooltip(
+                `<div>
+                     <b>ESCOLA 012 CIDADE 0</b><br>BAIRRO B1<br>14 votos · 1,8% dos válidos<br>1020 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ed7fe566ee75c7ec315673f72c85be95 = L.circleMarker(
+                [-29.377116, -53.133515],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.707619738290479, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_ed7fe566ee75c7ec315673f72c85be95.bindTooltip(
+                `<div>
+                     <b>ESCOLA 082 CIDADE 0</b><br>BAIRRO B2<br>14 votos · 2,3% dos válidos<br>752 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f218d298af959d6598ea92ab40b29131 = L.circleMarker(
+                [-29.396369, -53.050162],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.707619738290479, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_f218d298af959d6598ea92ab40b29131.bindTooltip(
+                `<div>
+                     <b>ESCOLA 101 CIDADE 0</b><br>BAIRRO B2<br>14 votos · 1,8% dos válidos<br>1059 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8d9a3e311715b63be02877d6ce40e676 = L.circleMarker(
+                [-29.519306, -53.175557],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.707619738290479, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_8d9a3e311715b63be02877d6ce40e676.bindTooltip(
+                `<div>
+                     <b>ESCOLA 048 CIDADE 0</b><br>BAIRRO A1<br>14 votos · 1,7% dos válidos<br>1073 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_88f7ab06b40dd6518466a73105028f63 = L.circleMarker(
+                [-29.421582, -53.142131],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_88f7ab06b40dd6518466a73105028f63.bindTooltip(
+                `<div>
+                     <b>ESCOLA 033 CIDADE 0</b><br>BAIRRO B2<br>13 votos · 3,1% dos válidos<br>585 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1bf60ce2e8f58cd51ec4225ed1034d50 = L.circleMarker(
+                [-29.466053, -53.21388],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_1bf60ce2e8f58cd51ec4225ed1034d50.bindTooltip(
+                `<div>
+                     <b>ESCOLA 007 CIDADE 0</b><br>BAIRRO A1<br>13 votos · 1,9% dos válidos<br>910 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5ac0b3010db56daa89543bc77755efd7 = L.circleMarker(
+                [-29.400419, -53.241266],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_5ac0b3010db56daa89543bc77755efd7.bindTooltip(
+                `<div>
+                     <b>ESCOLA 087 CIDADE 0</b><br>BAIRRO A2<br>13 votos · 2,3% dos válidos<br>703 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_68dd4ce3697038171c92e44c579458cf = L.circleMarker(
+                [-29.5983, -53.185608],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_68dd4ce3697038171c92e44c579458cf.bindTooltip(
+                `<div>
+                     <b>ESCOLA 086 CIDADE 0</b><br>BAIRRO A1<br>13 votos · 2,4% dos válidos<br>739 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a879c0e627599b3ec25f4dbacc86951a = L.circleMarker(
+                [-29.343987, -53.131259],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_a879c0e627599b3ec25f4dbacc86951a.bindTooltip(
+                `<div>
+                     <b>ESCOLA 029 CIDADE 0</b><br>BAIRRO B2<br>13 votos · 1,9% dos válidos<br>839 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7ab423fb8ed87a729ee80cea638bc801 = L.circleMarker(
+                [-29.501787, -53.179721],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.284229075567875, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_7ab423fb8ed87a729ee80cea638bc801.bindTooltip(
+                `<div>
+                     <b>ESCOLA 072 CIDADE 0</b><br>BAIRRO A1<br>12 votos · 1,3% dos válidos<br>1192 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c0872c1a46cbce8878c7088eaa19e912 = L.circleMarker(
+                [-29.489595, -53.175279],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.284229075567875, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_c0872c1a46cbce8878c7088eaa19e912.bindTooltip(
+                `<div>
+                     <b>ESCOLA 077 CIDADE 0</b><br>BAIRRO A1<br>12 votos · 1,5% dos válidos<br>1054 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bccfa2ba9a6b6ed57802c4e7e9c0fecc = L.circleMarker(
+                [-29.540598, -53.253876],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.284229075567875, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_bccfa2ba9a6b6ed57802c4e7e9c0fecc.bindTooltip(
+                `<div>
+                     <b>ESCOLA 009 CIDADE 0</b><br>BAIRRO A1<br>12 votos · 1,4% dos válidos<br>1098 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0f5bcd3d7a23f535bc52cda5c8895c0c = L.circleMarker(
+                [-29.395414, -53.074009],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.059264160542899, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_0f5bcd3d7a23f535bc52cda5c8895c0c.bindTooltip(
+                `<div>
+                     <b>ESCOLA 084 CIDADE 0</b><br>BAIRRO B2<br>11 votos · 1,7% dos válidos<br>861 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_14595b0a7eede12273b72a2bf0d40f92 = L.circleMarker(
+                [-29.364571, -53.182565],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.059264160542899, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_14595b0a7eede12273b72a2bf0d40f92.bindTooltip(
+                `<div>
+                     <b>ESCOLA 071 CIDADE 0</b><br>BAIRRO A2<br>11 votos · 1,4% dos válidos<br>1090 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bc653284f15adaac6a2931a677c8b21e = L.circleMarker(
+                [-29.307098, -53.135689],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.059264160542899, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_bc653284f15adaac6a2931a677c8b21e.bindTooltip(
+                `<div>
+                     <b>ESCOLA 005 CIDADE 0</b><br>BAIRRO B2<br>11 votos · 1,4% dos válidos<br>982 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cfa7edb5e39f3727748896e470469252 = L.circleMarker(
+                [-29.537845, -53.040839],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.059264160542899, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_cfa7edb5e39f3727748896e470469252.bindTooltip(
+                `<div>
+                     <b>ESCOLA 028 CIDADE 0</b><br>BAIRRO B1<br>11 votos · 1,3% dos válidos<br>1095 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e594e72b0eff7b0718ce086f0c709038 = L.circleMarker(
+                [-29.492456, -53.18311],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.059264160542899, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_e594e72b0eff7b0718ce086f0c709038.bindTooltip(
+                `<div>
+                     <b>ESCOLA 013 CIDADE 0</b><br>BAIRRO A1<br>11 votos · 1,9% dos válidos<br>787 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_794629086e6d00895db43d59ab605d5b = L.circleMarker(
+                [-29.325154, -53.246895],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.823819106188661, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_794629086e6d00895db43d59ab605d5b.bindTooltip(
+                `<div>
+                     <b>ESCOLA 026 CIDADE 0</b><br>BAIRRO A2<br>10 votos · 1,6% dos válidos<br>796 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0e1cded2714a9f0e0db0c17cc55ac0cd = L.circleMarker(
+                [-29.45178, -53.156216],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.576276618858141, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_0e1cded2714a9f0e0db0c17cc55ac0cd.bindTooltip(
+                `<div>
+                     <b>ESCOLA 015 CIDADE 0</b><br>BAIRRO B1<br>9 votos · 2,0% dos válidos<br>589 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6c4991ae5165df451ef7878ba05cb130 = L.circleMarker(
+                [-29.426627, -53.389306],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.576276618858141, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_6c4991ae5165df451ef7878ba05cb130.bindTooltip(
+                `<div>
+                     <b>ESCOLA 092 CIDADE 0</b><br>BAIRRO A2<br>9 votos · 1,3% dos válidos<br>926 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_06a0e2d672930e7569954a5b7b05dd76 = L.circleMarker(
+                [-29.441531, -53.162144],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.576276618858141, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_06a0e2d672930e7569954a5b7b05dd76.bindTooltip(
+                `<div>
+                     <b>ESCOLA 089 CIDADE 0</b><br>BAIRRO B1<br>9 votos · 2,1% dos válidos<br>558 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b8609282fd4ba8aa88ee5ff9589ef81b = L.circleMarker(
+                [-29.360704, -53.012654],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.576276618858141, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_b8609282fd4ba8aa88ee5ff9589ef81b.bindTooltip(
+                `<div>
+                     <b>ESCOLA 031 CIDADE 0</b><br>BAIRRO B2<br>9 votos · 1,3% dos válidos<br>915 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6b66e686ab55b5f62954fb7b9897d9d8 = L.circleMarker(
+                [-29.362561, -53.207856],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.576276618858141, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_6b66e686ab55b5f62954fb7b9897d9d8.bindTooltip(
+                `<div>
+                     <b>ESCOLA 037 CIDADE 0</b><br>BAIRRO A2<br>9 votos · 1,2% dos válidos<br>942 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f9b56bca2becba591b399ba0b3b81f0b = L.circleMarker(
+                [-29.430798, -53.287393],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.576276618858141, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_f9b56bca2becba591b399ba0b3b81f0b.bindTooltip(
+                `<div>
+                     <b>ESCOLA 043 CIDADE 0</b><br>BAIRRO A2<br>9 votos · 1,0% dos válidos<br>1179 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0f58c952ec646970b4c877cb6476683e = L.circleMarker(
+                [-29.432249, -53.247156],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0d366b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.314554973040049, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_0f58c952ec646970b4c877cb6476683e.bindTooltip(
+                `<div>
+                     <b>ESCOLA 078 CIDADE 0</b><br>BAIRRO A2<br>8 votos · 2,4% dos válidos<br>444 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_59a61d9e87623283b5f7ff9357727c38 = L.circleMarker(
+                [-29.428727, -52.972727],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.314554973040049, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_59a61d9e87623283b5f7ff9357727c38.bindTooltip(
+                `<div>
+                     <b>ESCOLA 057 CIDADE 0</b><br>BAIRRO B2<br>8 votos · 1,4% dos válidos<br>713 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6718ee9e40c19237072e64403b2c91b6 = L.circleMarker(
+                [-29.543607, -53.210179],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.314554973040049, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_6718ee9e40c19237072e64403b2c91b6.bindTooltip(
+                `<div>
+                     <b>ESCOLA 035 CIDADE 0</b><br>BAIRRO A1<br>8 votos · 1,1% dos válidos<br>1067 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_342951823322f8c7615cf16086f56d5e = L.circleMarker(
+                [-29.445776, -53.284645],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.314554973040049, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_342951823322f8c7615cf16086f56d5e.bindTooltip(
+                `<div>
+                     <b>ESCOLA 034 CIDADE 0</b><br>BAIRRO A1<br>8 votos · 1,1% dos válidos<br>943 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0bded72b96379c6258ece73200b9d867 = L.circleMarker(
+                [-29.392437, -53.191671],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.035896621379385, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_0bded72b96379c6258ece73200b9d867.bindTooltip(
+                `<div>
+                     <b>ESCOLA 085 CIDADE 0</b><br>BAIRRO A2<br>7 votos · 1,3% dos válidos<br>719 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_74f992887912e8e0e2919b8c212c7422 = L.circleMarker(
+                [-29.273157, -53.143344],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.035896621379385, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_74f992887912e8e0e2919b8c212c7422.bindTooltip(
+                `<div>
+                     <b>ESCOLA 010 CIDADE 0</b><br>BAIRRO B2<br>7 votos · 0,8% dos válidos<br>1104 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_702edc6b149990458a0dcfc90ff76ad7 = L.circleMarker(
+                [-29.406985, -53.171821],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.035896621379385, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_702edc6b149990458a0dcfc90ff76ad7.bindTooltip(
+                `<div>
+                     <b>ESCOLA 081 CIDADE 0</b><br>BAIRRO A2<br>7 votos · 1,1% dos válidos<br>812 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a3094a23f99e22661785b56deace8236 = L.circleMarker(
+                [-29.40818, -53.012069],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.035896621379385, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_a3094a23f99e22661785b56deace8236.bindTooltip(
+                `<div>
+                     <b>ESCOLA 075 CIDADE 0</b><br>BAIRRO B2<br>7 votos · 1,0% dos válidos<br>860 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ecc71a33abc0c56063972b8654cfc01e = L.circleMarker(
+                [-29.444003, -53.190572],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.035896621379385, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_ecc71a33abc0c56063972b8654cfc01e.bindTooltip(
+                `<div>
+                     <b>ESCOLA 065 CIDADE 0</b><br>BAIRRO A1<br>7 votos · 1,3% dos válidos<br>709 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_31f18bc445fa74163ad8cf11938bc08f = L.circleMarker(
+                [-29.339733, -53.208135],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.035896621379385, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_31f18bc445fa74163ad8cf11938bc08f.bindTooltip(
+                `<div>
+                     <b>ESCOLA 047 CIDADE 0</b><br>BAIRRO A2<br>7 votos · 1,3% dos válidos<br>678 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f26d13fea27ae9ce332ab882680d2514 = L.circleMarker(
+                [-29.527438, -53.054168],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.736514212677166, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_f26d13fea27ae9ce332ab882680d2514.bindTooltip(
+                `<div>
+                     <b>ESCOLA 098 CIDADE 0</b><br>BAIRRO B1<br>6 votos · 1,7% dos válidos<br>495 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3bb102cb36a36d421cea798a7cee8b8e = L.circleMarker(
+                [-29.436626, -53.205396],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.736514212677166, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_3bb102cb36a36d421cea798a7cee8b8e.bindTooltip(
+                `<div>
+                     <b>ESCOLA 050 CIDADE 0</b><br>BAIRRO A2<br>6 votos · 1,4% dos válidos<br>546 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_88d8c44ad8c6b8e87ba20308a0b87c7e = L.circleMarker(
+                [-29.335711, -53.230992],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.736514212677166, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_88d8c44ad8c6b8e87ba20308a0b87c7e.bindTooltip(
+                `<div>
+                     <b>ESCOLA 073 CIDADE 0</b><br>BAIRRO A2<br>6 votos · 1,6% dos válidos<br>505 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f814b4a2f8a3a58fcd8236116f05b19a = L.circleMarker(
+                [-29.4998, -53.141047],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.736514212677166, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_f814b4a2f8a3a58fcd8236116f05b19a.bindTooltip(
+                `<div>
+                     <b>ESCOLA 091 CIDADE 0</b><br>BAIRRO B1<br>6 votos · 1,7% dos válidos<br>457 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_49313359f0e80a597690d8d633035514 = L.circleMarker(
+                [-29.293745, -53.287821],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.736514212677166, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_49313359f0e80a597690d8d633035514.bindTooltip(
+                `<div>
+                     <b>ESCOLA 008 CIDADE 0</b><br>BAIRRO A2<br>6 votos · 1,8% dos válidos<br>396 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d02ce1c514bc8d537e0f49707dc0f27f = L.circleMarker(
+                [-29.389987, -53.258579],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.736514212677166, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_d02ce1c514bc8d537e0f49707dc0f27f.bindTooltip(
+                `<div>
+                     <b>ESCOLA 042 CIDADE 0</b><br>BAIRRO A2<br>6 votos · 0,9% dos válidos<br>868 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d6eb90ab057a6523650ceecec8f2bdee = L.circleMarker(
+                [-29.39077, -53.187039],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.736514212677166, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_d6eb90ab057a6523650ceecec8f2bdee.bindTooltip(
+                `<div>
+                     <b>ESCOLA 023 CIDADE 0</b><br>BAIRRO A2<br>6 votos · 0,8% dos válidos<br>922 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e299b6cd67cddb4a56a5e3f8e8dbcd7f = L.circleMarker(
+                [-29.557184, -52.972819],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.410955201203233, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_e299b6cd67cddb4a56a5e3f8e8dbcd7f.bindTooltip(
+                `<div>
+                     <b>ESCOLA 016 CIDADE 0</b><br>BAIRRO B1<br>5 votos · 1,3% dos válidos<br>498 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_15d75cba5e9af925c164c3c53626fef7 = L.circleMarker(
+                [-29.501685, -52.87279],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.410955201203233, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_15d75cba5e9af925c164c3c53626fef7.bindTooltip(
+                `<div>
+                     <b>ESCOLA 074 CIDADE 0</b><br>BAIRRO B1<br>5 votos · 0,8% dos válidos<br>815 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dc8600c17f974ecf644e600d57477285 = L.circleMarker(
+                [-29.302275, -53.201555],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.410955201203233, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_dc8600c17f974ecf644e600d57477285.bindTooltip(
+                `<div>
+                     <b>ESCOLA 083 CIDADE 0</b><br>BAIRRO A2<br>5 votos · 0,6% dos válidos<br>1119 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d9de3ee964f6bfa9bff6f3c1895bce53 = L.circleMarker(
+                [-29.350064, -53.134853],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.410955201203233, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_d9de3ee964f6bfa9bff6f3c1895bce53.bindTooltip(
+                `<div>
+                     <b>ESCOLA 064 CIDADE 0</b><br>BAIRRO B2<br>5 votos · 0,6% dos válidos<br>1020 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_09dff1d678f48dee2c1538ffeff3191a = L.circleMarker(
+                [-29.45082, -53.358294],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.410955201203233, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_09dff1d678f48dee2c1538ffeff3191a.bindTooltip(
+                `<div>
+                     <b>ESCOLA 003 CIDADE 0</b><br>BAIRRO A1<br>5 votos · 0,9% dos válidos<br>729 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e99cb22c4f08e55d20ef64e6a91ebca2 = L.circleMarker(
+                [-29.368134, -53.181373],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.410955201203233, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_e99cb22c4f08e55d20ef64e6a91ebca2.bindTooltip(
+                `<div>
+                     <b>ESCOLA 006 CIDADE 0</b><br>BAIRRO A2<br>5 votos · 1,5% dos válidos<br>430 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c7736a033c297b350a604f7a92e01810 = L.circleMarker(
+                [-29.456709, -53.217066],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.410955201203233, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_c7736a033c297b350a604f7a92e01810.bindTooltip(
+                `<div>
+                     <b>ESCOLA 030 CIDADE 0</b><br>BAIRRO A1<br>5 votos · 1,4% dos válidos<br>451 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d47ec0914d0be4697b3c0665cc9dacd4 = L.circleMarker(
+                [-29.295821, -53.190067],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1b57a3", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.410955201203233, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_d47ec0914d0be4697b3c0665cc9dacd4.bindTooltip(
+                `<div>
+                     <b>ESCOLA 045 CIDADE 0</b><br>BAIRRO A2<br>5 votos · 1,4% dos válidos<br>457 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7160b5b8d989574689d0c50dcc7f54a9 = L.circleMarker(
+                [-29.616511, -53.146383],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.410955201203233, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_7160b5b8d989574689d0c50dcc7f54a9.bindTooltip(
+                `<div>
+                     <b>ESCOLA 063 CIDADE 0</b><br>BAIRRO B1<br>5 votos · 1,1% dos válidos<br>579 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d102fe2a98c9f7e38eb9ba4825f696c5 = L.circleMarker(
+                [-29.422161, -53.18669],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.410955201203233, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_d102fe2a98c9f7e38eb9ba4825f696c5.bindTooltip(
+                `<div>
+                     <b>ESCOLA 066 CIDADE 0</b><br>BAIRRO A2<br>5 votos · 0,7% dos válidos<br>908 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3b3eead11f244762a8b31b98b466651f = L.circleMarker(
+                [-29.560088, -53.369418],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.410955201203233, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_3b3eead11f244762a8b31b98b466651f.bindTooltip(
+                `<div>
+                     <b>ESCOLA 060 CIDADE 0</b><br>BAIRRO A1<br>5 votos · 0,7% dos válidos<br>996 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c6d84d2aaac60de1f26e462b39d2c239 = L.circleMarker(
+                [-29.281929, -53.090923],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.05085107923876, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_c6d84d2aaac60de1f26e462b39d2c239.bindTooltip(
+                `<div>
+                     <b>ESCOLA 018 CIDADE 0</b><br>BAIRRO B2<br>4 votos · 1,1% dos válidos<br>473 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c4401111c144930cac4f82bb18b786ee = L.circleMarker(
+                [-29.447126, -53.224269],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.05085107923876, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_c4401111c144930cac4f82bb18b786ee.bindTooltip(
+                `<div>
+                     <b>ESCOLA 069 CIDADE 0</b><br>BAIRRO A1<br>4 votos · 0,9% dos válidos<br>586 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ec3a665029e5f1795afaf4fc0f05e31f = L.circleMarker(
+                [-29.50698, -52.963801],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.05085107923876, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_ec3a665029e5f1795afaf4fc0f05e31f.bindTooltip(
+                `<div>
+                     <b>ESCOLA 024 CIDADE 0</b><br>BAIRRO B1<br>4 votos · 1,2% dos válidos<br>409 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_47c5aad24dff731cb0594279d09d016b = L.circleMarker(
+                [-29.276796, -52.962421],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.05085107923876, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_47c5aad24dff731cb0594279d09d016b.bindTooltip(
+                `<div>
+                     <b>ESCOLA 079 CIDADE 0</b><br>BAIRRO B2<br>4 votos · 0,6% dos válidos<br>884 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_07bd4687744fe38f46f694b41b0113c8 = L.circleMarker(
+                [-29.450373, -53.327924],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.05085107923876, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_07bd4687744fe38f46f694b41b0113c8.bindTooltip(
+                `<div>
+                     <b>ESCOLA 019 CIDADE 0</b><br>BAIRRO A1<br>4 votos · 1,0% dos válidos<br>525 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_677c08da74c5a807d91dfbb74d838cdb = L.circleMarker(
+                [-29.370414, -53.302349],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.05085107923876, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_677c08da74c5a807d91dfbb74d838cdb.bindTooltip(
+                `<div>
+                     <b>ESCOLA 046 CIDADE 0</b><br>BAIRRO A2<br>4 votos · 0,6% dos válidos<br>823 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b22005a6aa7d5c5659be0b8e9e77f587 = L.circleMarker(
+                [-29.379154, -53.015761],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.05085107923876, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_b22005a6aa7d5c5659be0b8e9e77f587.bindTooltip(
+                `<div>
+                     <b>ESCOLA 100 CIDADE 0</b><br>BAIRRO B2<br>4 votos · 0,5% dos válidos<br>963 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_714b613a6e3db7501be79b40183f37c4 = L.circleMarker(
+                [-29.536915, -53.258625],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.05085107923876, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_714b613a6e3db7501be79b40183f37c4.bindTooltip(
+                `<div>
+                     <b>ESCOLA 051 CIDADE 0</b><br>BAIRRO A1<br>4 votos · 1,1% dos válidos<br>506 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2b847ddfa6914a9d0469b4a89e3cfdf8 = L.circleMarker(
+                [-29.502433, -53.276099],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.05085107923876, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_2b847ddfa6914a9d0469b4a89e3cfdf8.bindTooltip(
+                `<div>
+                     <b>ESCOLA 062 CIDADE 0</b><br>BAIRRO A1<br>4 votos · 0,6% dos válidos<br>791 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1a184909df6a1fb2e1cc019d4e71d3b5 = L.circleMarker(
+                [-29.489822, -53.310952],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.05085107923876, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_1a184909df6a1fb2e1cc019d4e71d3b5.bindTooltip(
+                `<div>
+                     <b>ESCOLA 068 CIDADE 0</b><br>BAIRRO A1<br>4 votos · 0,8% dos válidos<br>631 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_44d084fba2f5daf0580c2a857f680f2d = L.circleMarker(
+                [-29.393274, -53.138524],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.642114537783938, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_44d084fba2f5daf0580c2a857f680f2d.bindTooltip(
+                `<div>
+                     <b>ESCOLA 041 CIDADE 0</b><br>BAIRRO B2<br>3 votos · 0,9% dos válidos<br>444 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_439a46ab209811732f8789e4f0b59010 = L.circleMarker(
+                [-29.495762, -53.31477],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.642114537783938, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_439a46ab209811732f8789e4f0b59010.bindTooltip(
+                `<div>
+                     <b>ESCOLA 095 CIDADE 0</b><br>BAIRRO A1<br>3 votos · 0,5% dos válidos<br>670 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_13b7bb17e2e715e379b9cd251f72b68b = L.circleMarker(
+                [-29.481162, -53.422943],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.642114537783938, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_13b7bb17e2e715e379b9cd251f72b68b.bindTooltip(
+                `<div>
+                     <b>ESCOLA 027 CIDADE 0</b><br>BAIRRO A1<br>3 votos · 0,5% dos válidos<br>790 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f9b8f3139726e3c85910181a58bbb7b9 = L.circleMarker(
+                [-29.338595, -53.221764],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.642114537783938, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_f9b8f3139726e3c85910181a58bbb7b9.bindTooltip(
+                `<div>
+                     <b>ESCOLA 004 CIDADE 0</b><br>BAIRRO A2<br>3 votos · 0,9% dos válidos<br>438 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5d7447396f97cb4ac616a09ca038111e = L.circleMarker(
+                [-29.420746, -53.230162],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.642114537783938, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_5d7447396f97cb4ac616a09ca038111e.bindTooltip(
+                `<div>
+                     <b>ESCOLA 021 CIDADE 0</b><br>BAIRRO A2<br>3 votos · 0,5% dos válidos<br>810 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6ae3f58c9a4b412fc605e4855b8606be = L.circleMarker(
+                [-29.656588, -53.210237],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.642114537783938, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_6ae3f58c9a4b412fc605e4855b8606be.bindTooltip(
+                `<div>
+                     <b>ESCOLA 025 CIDADE 0</b><br>BAIRRO A1<br>3 votos · 0,6% dos válidos<br>620 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e6141b8d9a45587a91194289fc942505 = L.circleMarker(
+                [-29.475083, -53.330308],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.642114537783938, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_e6141b8d9a45587a91194289fc942505.bindTooltip(
+                `<div>
+                     <b>ESCOLA 080 CIDADE 0</b><br>BAIRRO A1<br>3 votos · 0,7% dos válidos<br>639 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5a5258aaf97ee963d1317a51709799e9 = L.circleMarker(
+                [-29.550612, -53.235956],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.642114537783938, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_5a5258aaf97ee963d1317a51709799e9.bindTooltip(
+                `<div>
+                     <b>ESCOLA 017 CIDADE 0</b><br>BAIRRO A1<br>3 votos · 0,8% dos válidos<br>471 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9d0788b731cd7684497b114ebefd13aa = L.circleMarker(
+                [-29.576911, -53.058945],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2e7cda", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.642114537783938, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_9d0788b731cd7684497b114ebefd13aa.bindTooltip(
+                `<div>
+                     <b>ESCOLA 053 CIDADE 0</b><br>BAIRRO B1<br>3 votos · 1,0% dos válidos<br>408 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f4924a630f1c5a1a2d9d8fa962a2bb8f = L.circleMarker(
+                [-29.337148, -53.257724],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.157277486520025, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_f4924a630f1c5a1a2d9d8fa962a2bb8f.bindTooltip(
+                `<div>
+                     <b>ESCOLA 036 CIDADE 0</b><br>BAIRRO A2<br>2 votos · 0,7% dos válidos<br>381 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3292e45ff40ed24756a2158969039588 = L.circleMarker(
+                [-29.423755, -53.301675],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.157277486520025, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_3292e45ff40ed24756a2158969039588.bindTooltip(
+                `<div>
+                     <b>ESCOLA 090 CIDADE 0</b><br>BAIRRO A2<br>2 votos · 0,4% dos válidos<br>748 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e6d902a3e5e57d575debfe2fa4b22477 = L.circleMarker(
+                [-29.347516, -53.071105],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.157277486520025, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_e6d902a3e5e57d575debfe2fa4b22477.bindTooltip(
+                `<div>
+                     <b>ESCOLA 022 CIDADE 0</b><br>BAIRRO B2<br>2 votos · 0,6% dos válidos<br>379 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1af5d0c251de4dbe0741eb24e99b6952 = L.circleMarker(
+                [-29.395945, -53.181036],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6ba6ec", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.157277486520025, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_1af5d0c251de4dbe0741eb24e99b6952.bindTooltip(
+                `<div>
+                     <b>ESCOLA 002 CIDADE 0</b><br>BAIRRO A2<br>2 votos · 0,7% dos válidos<br>363 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_665b60092c3e18a4ce19d0fdddd158fd = L.circleMarker(
+                [-29.530599, -53.282475],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.157277486520025, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_665b60092c3e18a4ce19d0fdddd158fd.bindTooltip(
+                `<div>
+                     <b>ESCOLA 076 CIDADE 0</b><br>BAIRRO A1<br>2 votos · 0,5% dos válidos<br>522 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_71cb3bb82f8198f7b611b3d32b6a15c2 = L.circleMarker(
+                [-29.529137, -53.246346],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.157277486520025, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_71cb3bb82f8198f7b611b3d32b6a15c2.bindTooltip(
+                `<div>
+                     <b>ESCOLA 088 CIDADE 0</b><br>BAIRRO A1<br>2 votos · 0,2% dos válidos<br>1092 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3ca97dab1678156bf849cbab8c696d84 = L.circleMarker(
+                [-29.578432, -53.154538],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.157277486520025, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_3ca97dab1678156bf849cbab8c696d84.bindTooltip(
+                `<div>
+                     <b>ESCOLA 044 CIDADE 0</b><br>BAIRRO B1<br>2 votos · 0,5% dos válidos<br>509 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_41f59ded78daaa1c859932ca17a54666 = L.circleMarker(
+                [-29.367233, -53.076944],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5254255396193805, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_41f59ded78daaa1c859932ca17a54666.bindTooltip(
+                `<div>
+                     <b>ESCOLA 070 CIDADE 0</b><br>BAIRRO B2<br>1 votos · 0,2% dos válidos<br>802 eleitores · 3 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cecb44202703e03fd23cf8433571c136 = L.circleMarker(
+                [-29.325263, -53.062584],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5254255396193805, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_cecb44202703e03fd23cf8433571c136.bindTooltip(
+                `<div>
+                     <b>ESCOLA 058 CIDADE 0</b><br>BAIRRO B2<br>1 votos · 0,1% dos válidos<br>974 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_80a9943322011707f7e10db6898390bf = L.circleMarker(
+                [-29.438052, -53.255395],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5254255396193805, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_80a9943322011707f7e10db6898390bf.bindTooltip(
+                `<div>
+                     <b>ESCOLA 055 CIDADE 0</b><br>BAIRRO A1<br>1 votos · 0,3% dos válidos<br>462 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d4fee444004218c3a9a6aa23c7ccc7c4 = L.circleMarker(
+                [-29.341323, -53.291984],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5254255396193805, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_d4fee444004218c3a9a6aa23c7ccc7c4.bindTooltip(
+                `<div>
+                     <b>ESCOLA 011 CIDADE 0</b><br>BAIRRO A2<br>1 votos · 0,3% dos válidos<br>419 eleitores · 2 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_81b487c943f56099b163a60daffbc8b2 = L.circleMarker(
+                [-29.371861, -53.012314],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_81b487c943f56099b163a60daffbc8b2.bindTooltip(
+                `<div>
+                     <b>ESCOLA 049 CIDADE 0</b><br>BAIRRO B2<br>0 votos · 0,0% dos válidos<br>1065 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_05acfcc67c09c02f87797b36978b498d = L.circleMarker(
+                [-29.574514, -53.037116],
+                {"bubblingMouseEvents": true, "color": "#fcfcfb", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#adcdf5", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_ef29e195a95f13259582f56f89b106da);
+        
+    
+            circle_marker_05acfcc67c09c02f87797b36978b498d.bindTooltip(
+                `<div>
+                     <b>ESCOLA 059 CIDADE 0</b><br>BAIRRO B1<br>0 votos · 0,0% dos válidos<br>987 eleitores · 4 seções
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_ef29e195a95f13259582f56f89b106da.addTo(map_1b37bc8f2208fe55066899472d40bf78);
+        
+    
+            var layer_control_b3f94bb6d5e16ad7edf117ac84e85bd0_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_b6e0ece2956e6ffff3074d6b9d1eea5f,
+                },
+                overlays :  {
+                    "Limite municipal" : geo_json_eab742fa6f799a83aa0ff34ed05c02fa,
+                    "Hex\u00e1gonos (Gi*)" : geo_json_41e498ceeeeef0a8fe144f20a8bb6de1,
+                    "Locais de vota\u00e7\u00e3o" : feature_group_ef29e195a95f13259582f56f89b106da,
+                },
+            };
+            let layer_control_b3f94bb6d5e16ad7edf117ac84e85bd0 = L.control.layers(
+                layer_control_b3f94bb6d5e16ad7edf117ac84e85bd0_layers.base_layers,
+                layer_control_b3f94bb6d5e16ad7edf117ac84e85bd0_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_1b37bc8f2208fe55066899472d40bf78);
+
+        
+</script>
+</html>

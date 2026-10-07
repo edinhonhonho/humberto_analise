@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_RO_senador"]=[[221,"Dr. Fernando Máximo",570799,1],[222,"Bruno Scheid",474226,1],[111,"Sílvia Cristina",304061,1],[100,"Mariana Carvalho",207398,1],[133,"Luciana Oliveira",96391,1],[123,"Acir Gurgacz",72490,1],[400,"Neidinha",25316,1],[555,"Luis Fernando",23737,1],[144,"Engenheiro Thulio",7594,1],[432,"Aires Mota",3202,1]];

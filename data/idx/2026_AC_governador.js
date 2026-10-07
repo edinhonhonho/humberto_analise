@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_AC_governador"]=[[11,"Mailza Assis",218760,1],[10,"Alan Rick",141859,1],[45,"Tião Bocalom",44946,1],[40,"Thor Dantas",32963,1],[21,"Eudo Raffael",715,1],[36,"Dr.luisinho",404,1]];

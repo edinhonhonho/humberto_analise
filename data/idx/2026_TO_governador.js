@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_TO_governador"]=[[44,"Professora Dorinha",386260,1],[45,"Vicentinho Júnior",372848,1],[55,"Laurez Moreira",69967,1],[30,"Ataides de Oliveira",13173,1],[50,"Prof Witer Naves",5109,1],[27,"Du Pereira",1272,1],[35,"Siqueira Campos Jr",1027,1]];

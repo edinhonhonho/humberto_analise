@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_MS_governador"]=[[11,"Eduardo Riedel",914323,1],[13,"Fábio Trad",322807,1],[30,"João Henrique Catan",98677,1],[25,"Delcidio Amaral",14431,1],[27,"Economista Renato Gomes",5589,1],[50,"Lucien Rezende",4444,1],[29,"Daniel Lemes",2115,1],[36,"Jeferson Bezerra",912,1]];

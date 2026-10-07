@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_PA_governador"]=[[20,"Dr. Daniel",2345721,1],[15,"Hana Ghassan",2125084,1],[50,"Araceli",85857,1],[80,"Gal Leite",5503,1],[16,"Cleber Rabelo",2676,1],[35,"José Moita",1987,1]];

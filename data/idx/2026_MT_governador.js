@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_MT_governador"]=[[10,"Otaviano Pivetta",1128099,1],[22,"Wellington Fagundes",430442,1],[55,"Doutora Natasha",281548,1],[14,"Rafaell Milas",10300,1],[36,"Sargento Laudicério (lau)",3210,1],[33,"Mauricio Coelho",2694,1]];

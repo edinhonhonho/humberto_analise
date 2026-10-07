@@ -1,0 +1,13 @@
+{
+  "ano": 2026,
+  "uf": "RS",
+  "cargo": 7,
+  "turno": 1,
+  "numero": 65065,
+  "pasta_dados": "dados_teste",
+  "saida": "tests/saida_cfg_{ano}",
+  "top_cidades": 3,
+  "cidades": "",
+  "h3_res": 8,
+  "permutacoes": 99
+}

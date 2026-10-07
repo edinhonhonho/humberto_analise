@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_SP_governador"]=[[10,"Tarcísio",14491874,1],[13,"Fernando Haddad",8423656,1],[80,"Vivian Mendes",80480,1],[16,"Vera Lúcia",75641,1],[21,"Carlos Machado",58862,1],[29,"Izadora Dias",22370,1]];

@@ -175,7 +175,8 @@ const abreGuia=()=>{const d=document.getElementById('guia');if(d&&d.tagName==='D
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('a[href="#guia"]'))abreGuia()});
 
 /* ---------- desenho da página ---------- */
-function desenhar(P,geoSvg){
+function desenhar(P,geoSvg,o){
+ const keep=o&&o.manter?cur:null;
  offs.forEach(f=>f());offs=[];if(cur!=null)fechar(false);TIPS={};BM={};
  D=P.d||null;names=D&&D.mun?Object.entries(D.mun).map(([cd,m])=>({cd,n:m.n,k:norm(m.n)})).sort((a,b)=>a.n.localeCompare(b.n,'pt-BR')):[];
  const S=window.__S||{};
@@ -186,33 +187,51 @@ function desenhar(P,geoSvg){
  document.title=SHELL?'Eleições':P.t;
  {const f=document.getElementById('foot');if(f)app.appendChild(f.content.cloneNode(true))}
  iniciar();
+ if(keep!=null&&D&&D.mun&&D.mun[keep])abrir(keep);
  if(location.hash==='#guia')abreGuia();
  const m0=new URLSearchParams(location.search).get('m');
  if(m0&&D&&D.mun&&D.mun[m0]){abrir(m0);const c=document.getElementById('mapa-estado');if(c)setTimeout(()=>c.scrollIntoView({block:'center'}),50)}}
 
 /* ---------- carga de dados e roteamento (página única) ---------- */
-const cacheP={},cacheG={},ordem=[];
-function carregar(src){return new Promise((ok,err)=>{const s=document.createElement('script');s.src=src;s.onload=()=>{s.remove();ok()};s.onerror=()=>{s.remove();err(src)};document.head.appendChild(s)})}
+const cacheP={},ordem=[];
 const bust=LOCAL?'?'+Date.now():'';
-function pagina(key){if(cacheP[key])return Promise.resolve(cacheP[key]);
- return carregar(ROOT+'data/c/'+key+'.js'+bust).then(()=>{const P=(window.__P||{})[key];if(!P)throw key;delete window.__P[key];cacheP[key]=P;ordem.push(key);
-  while(ordem.length>8)delete cacheP[ordem.shift()];return P})}
-function geo(nome){if(!nome)return Promise.resolve('');if(cacheG[nome])return Promise.resolve(cacheG[nome]);
- return carregar(ROOT+'assets/geo/'+nome+'.js').then(()=>{cacheG[nome]=(window.__GEO||{})[nome]||'';return cacheG[nome]})}
 let barra=null,seq=0;
 function indo(){B.classList.add('indo');if(!barra){barra=mk('div');barra.id='progresso';B.appendChild(barra)}barra.classList.remove('on');void barra.offsetWidth;barra.classList.add('on')}
 function fim(){B.classList.remove('indo');if(barra)barra.classList.remove('on')}
+
+/* ---------- motor de cálculo (Web Worker): lê os dados da UF e calcula a análise na hora ---------- */
+const SLUG={'presidente':1,'governador':3,'senador':5,'deputado-federal':6,'deputado-estadual':7,'deputado-distrital':8};
+let W=null,wid=0,espera={};
+function worker(){if(W)return W;
+ W=new Worker(ROOT+'assets/motor.js'+bust);
+ W.onmessage=e=>{const m=e.data,f=espera[m.id];if(f)f(m)};
+ W.onerror=ev=>{const fs=Object.values(espera);espera={};W=null;fs.forEach(f=>f({tipo:'erro',msg:(ev&&ev.message)||'falha no motor'}))};
+ return W}
+function cancelar(){if(W&&Object.keys(espera).length){W.terminate();W=null;espera={}}}
+function calcular(key,aoEtapa){return new Promise((ok,err)=>{
+ const [ano,uf,slug,num]=key.split('/'),cargo=SLUG[slug];if(!cargo||!window.Worker){err(new Error('sem motor'));return}
+ const id=++wid;
+ espera[id]=m=>{if(m.tipo==='erro'){delete espera[id];err(new Error(m.msg));return}
+  aoEtapa(m.P,m.etapa);if(m.final){delete espera[id];ok(m.P)}};
+ worker().postMessage({tipo:'calcular',id,base:new URL(ROOT+'data/br',location.href).href,ano:+ano,uf:uf.toUpperCase(),cargo,turno:1,numero:+num})})}
+
 const App=window.App={atual:null,
- pre(key){pagina(key).catch(()=>{})},
- async ir(key,o){o=o||{};const my=++seq;indo();
-  try{const P=await pagina(key);const g=await geo(P.g);if(my!==seq)return;
-   if(o.push!==false){const u=new URL(location.href);u.search='?c='+key;u.hash='';
-    (o.replace?history.replaceState:history.pushState).call(history,null,'',u)}
-   App.atual=key;desenhar(P,g);fim();
-   if(window.va)try{va('pageview',{route:null,path:'/'+key})}catch(_){}
-   if(!o.semScroll)scrollTo(0,0);
-   document.dispatchEvent(new CustomEvent('app:page',{detail:P.m||null}))}
-  catch(_){if(my!==seq)return;fim();app.innerHTML='<p class="carregando">Essa análise ainda não foi gerada. Use <b>Trocar candidato</b> para escolher outra.</p>'}}};
+ pre(key){},
+ async ir(key,o){o=o||{};const my=++seq;cancelar();indo();let primeira=true,P=cacheP[key];
+  const publicar=(Pn,et)=>{if(my!==seq)return;
+   if(primeira){
+    if(o.push!==false){const u=new URL(location.href);u.search='?c='+key;u.hash='';
+     (o.replace?history.replaceState:history.pushState).call(history,null,'',u)}
+    App.atual=key;desenhar(Pn,Pn.gs||'');if(!o.semScroll)scrollTo(0,0);primeira=false;
+    if(window.va)try{va('pageview',{route:null,path:'/'+key})}catch(_){}
+    document.dispatchEvent(new CustomEvent('app:page',{detail:Pn.m||null}))}
+   else{const y=scrollY;desenhar(Pn,Pn.gs||'',{manter:true});scrollTo(0,y)}};
+  try{
+   if(P)publicar(P,3);
+   else{P=await calcular(key,publicar);if(my!==seq)return;cacheP[key]=P;ordem.push(key);while(ordem.length>8)delete cacheP[ordem.shift()]}
+   fim()}
+  catch(er){if(my!==seq)return;fim();
+   if(primeira)app.innerHTML='<p class="carregando">'+(/sem votos/.test(er.message)?'Esse candidato não tem votos neste cargo e estado.':'Não consegui carregar essa análise. Tente de novo ou escolha outro candidato em <b>Trocar candidato</b>.')+'</p>'}}};
 if(SHELL){
  const k0=new URLSearchParams(location.search).get('c');let pad=null;try{pad=JSON.parse(B.dataset.padrao)}catch(_){}
  const k=k0||pad;

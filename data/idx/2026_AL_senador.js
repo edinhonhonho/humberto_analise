@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_AL_senador"]=[[111,"Arthur Lira",948703,1],[456,"Marina Jhc",926860,1],[151,"Renan",731045,1],[156,"Dr. Wanderley",358478,1],[100,"Davi Davino Filho",293008,1],[800,"Alexandre Fleming",26048,1],[355,"Mariedson",2459,1]];

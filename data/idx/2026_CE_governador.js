@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_CE_governador"]=[[13,"Elmano de Freitas",2875573,1],[45,"Ciro Gomes",2498891,1],[14,"Delegado Huggo",17219,1],[30,"Vera Lúcia",5701,1],[80,"Serley Leal",4344,1],[16,"Zé Batista",2161,1],[35,"Danilo Soares",1743,1],[29,"Ieri Braga",463,1]];

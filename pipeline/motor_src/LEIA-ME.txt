@@ -1,0 +1,3 @@
+Código-fonte do motor que roda no navegador (Web Worker). O arquivo pronto é eleicao/web/motor.js.
+Para refazê-lo (precisa de Node): npm i hyparquet esbuild && npx esbuild worker.js --bundle --format=iife --minify --external:node:fs/promises --outfile=../eleicao/web/motor.js
+(dentro desta pasta, com package.json "type":"module")

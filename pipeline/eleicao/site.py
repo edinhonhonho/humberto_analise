@@ -96,8 +96,8 @@ def escrever_standalone(p: dict, destino) -> Path:
 
 
 # ------------------------------------------------------------------ site em pastas
-CARGOS = {1: "Presidente", 3: "Governador", 5: "Senador", 6: "Deputado Federal", 7: "Deputado Estadual"}
-SLUGS = {1: "presidente", 3: "governador", 5: "senador", 6: "deputado-federal", 7: "deputado-estadual"}
+CARGOS = {1: "Presidente", 3: "Governador", 5: "Senador", 6: "Deputado Federal", 7: "Deputado Estadual", 8: "Deputado Distrital"}
+SLUGS = {1: "presidente", 3: "governador", 5: "senador", 6: "deputado-federal", 7: "deputado-estadual", 8: "deputado-distrital"}
 COD_DO_SLUG = {v: k for k, v in SLUGS.items()}
 
 
@@ -120,7 +120,7 @@ def _assets(raiz: Path) -> dict:
     ad = raiz / "assets"
     ad.mkdir(parents=True, exist_ok=True)
     out = {}
-    for nome in ("app.css", "app.js", "switcher.js", "gerar.js"):
+    for nome in ("app.css", "app.js", "switcher.js", "gerar.js", "motor.js"):
         txt = _ler(nome)
         (ad / nome).write_text(txt, encoding="utf-8")
         out[nome] = f"{nome}?v={_hash(txt)}"
@@ -328,7 +328,8 @@ def _destaques(raiz: Path) -> list[dict]:
     out = []
     for d in _ler_json(raiz / "data" / "destaques.json", []):
         out.append(d | {"cargo_nome": CARGOS.get(d["cargo"], f'Cargo {d["cargo"]}'), "cargo_slug": slug_cargo(d["cargo"]),
-                        "ok": (raiz / caminho_pagina(d["ano"], d["uf"], d["cargo"], d["numero"])).exists()})
+                        "ok": ((raiz / caminho_pagina(d["ano"], d["uf"], d["cargo"], d["numero"])).exists()
+                               or (raiz / "data" / "br" / str(d["ano"]) / d["uf"] / "meta.json").exists())})
     return out
 
 
@@ -358,7 +359,7 @@ def _entrada(raiz: Path, man: dict, a: dict, icon: str, fav: str) -> None:
         f'<body data-shell="1" data-root="" data-padrao=\'{pad}\'>{_NOSCRIPT}{report.NAV}'
         f'<div id="dest-slot"></div><main id="app"><p class="carregando">Carregando a análise…</p></main>'
         f'<template id="foot">{_rodape(icon)}</template>'
-        f'<script src="data/manifest.js"></script><script src="assets/static.js?v={int(_time.time())}"></script>'
+        f'<script src="data/manifest.js"></script>'
         f'<script src="assets/{a["app.js"]}"></script><script src="assets/{a["switcher.js"]}"></script></body></html>',
         encoding="utf-8")
     (raiz / "gerar.html").write_text(

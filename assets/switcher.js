@@ -12,10 +12,10 @@ const pan=mk('div','swp');pan.hidden=true;bar.appendChild(btn);nav.appendChild(p
 let uf=null,cargo=null,M=null,mostrar=10;const cache={};
 const uniq=a=>[...new Set(a)];
 const ttl=mk('h2','swt','Trocar candidato');
-const aviso=mk('p','swa','Análises geradas apenas para candidatos de partidos de esquerda. Os demais candidatos ficam fora da lista, a menos que você peça para mostrá-los.');
+const aviso=mk('p','swa','Qualquer candidato da lista: a análise é calculada na hora, ao abrir.');
 const gu=mk('div','swgrp'),gc=mk('div','swgrp');
 const qw=mk('div','swq'),q=mk('input');q.type='search';q.placeholder='Buscar por nome ou número';q.autocomplete='off';q.setAttribute('aria-label','Buscar candidato');qw.appendChild(q);
-const sem=mk('label','swchk');const ck=mk('input');ck.type='checkbox';sem.append(ck,document.createTextNode(' Mostrar também candidatos sem análise'));
+const sem=mk('label','swchk');const ck=mk('input');ck.type='checkbox';sem.hidden=true;
 const info=mk('p','mhint'),ul=mk('ul','swl'),mais=mk('button','swmais','Mostrar mais');mais.type='button';mais.hidden=true;
 pan.append(ttl,aviso,gu,gc,qw,sem,info,ul,mais);
 const LOCAL=/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
@@ -37,7 +37,7 @@ function cards(){const D=(M&&M.destaques)||[],slot=document.getElementById('dest
   const tx=mk('span','tx');tx.append(mk('b',null,d.nome),mk('small',null,d.cargo_nome+' · '+d.uf+' · nº '+d.numero));
   el.append(ph,tx);if(here)el.appendChild(mk('em',null,'em análise'));sec.appendChild(el)});
  const mais=mk('button','dcard mais');mais.type='button';mais.setAttribute('aria-label','Outros candidatos: abrir a lista');
- const ph=mk('span','ph');ph.innerHTML='<svg class="plus" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 8v32M8 24h32" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></svg>';const n=M&&M.prontos?M.prontos:0;if(n)ph.append(mk('span','num',n.toLocaleString('pt-BR')),mk('span','cap','análises prontas'));
+ const ph=mk('span','ph');ph.innerHTML='<svg class="plus" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 8v32M8 24h32" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></svg>';const n=M&&M.prontos?M.prontos:0;if(n)ph.append(mk('span','num',n.toLocaleString('pt-BR')),mk('span','cap','candidatos'));
  const tx=mk('span','tx');tx.append(mk('b',null,'Outros candidatos'),mk('small',null,'Buscar por nome ou número'));
  mais.append(ph,tx);mais.addEventListener('click',e=>{e.stopPropagation();if(pan.hidden)btn.click();scrollTo({top:0,behavior:'smooth'})});sec.appendChild(mais);
  slot.replaceChildren(sec)}
@@ -56,11 +56,11 @@ async function lista(){const g=GR().find(g=>g.uf===uf&&g.cargo===cargo);ul.repla
  if(!cache[k]){try{await load(root+'data/idx/'+k+'.js?'+Date.now());cache[k]=(window.__IDX||{})[k]||[]}catch(_){cache[k]=[]}}
  const t=norm(q.value.trim()),todos=ck.checked,P=(M.partidos||{});
  const sig=n=>{let s=String(n);const d=s.length;const p=d>=2?s.slice(0,2):s;return P[p]||''};
- const rows=cache[k].filter(r=>(todos||r[3])&&(!t||norm(r[1]).includes(t)||String(r[0]).startsWith(t)));
+ const rows=cache[k].filter(r=>!t||norm(r[1]).includes(t)||String(r[0]).startsWith(t));
  const prontos=cache[k].filter(r=>r[3]).length;
- info.textContent=t?rows.length+' resultado(s)':prontos+' candidatos com análise'+(todos?' · '+cache[k].length+' na lista completa':'');
+ info.textContent=t?rows.length+' resultado(s)':cache[k].length.toLocaleString('pt-BR')+' candidatos';
  if(!rows.length){ul.appendChild(mk('li','vazio','Nenhum candidato encontrado.'));return}
- rows.slice(0,mostrar).forEach(r=>{const li=mk('li'),ok=!!r[3];let a;
+ rows.slice(0,mostrar).forEach(r=>{const li=mk('li'),ok=true;let a;
   if(ok||LOCAL){a=mk('a','row');a.href=ok?pagina(g.ano,g.uf,g.cargo_slug,r[0]):gerar(g.ano,g.uf,g.cargo_slug,r[0],r[1]);if(ok)liga(a,chave(g.ano,g.uf,g.cargo_slug,r[0]))}
   else{a=mk('div','row off')}
   if(cur&&g.ano===cur.ano&&g.uf===cur.uf&&g.cargo===cur.cargo&&r[0]===cur.numero)a.setAttribute('aria-current','page');

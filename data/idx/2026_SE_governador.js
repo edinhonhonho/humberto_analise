@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_SE_governador"]=[[55,"Fábio",727291,1],[10,"Valmir de Francisquinho",459908,1],[50,"Dr. Helton",37081,1],[22,"Ricardo Marques",31852,1],[27,"Taty  Cristina de Jesus",2728,1],[45,"Emanuel Cacho",1343,1]];

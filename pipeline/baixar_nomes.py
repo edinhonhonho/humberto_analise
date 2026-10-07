@@ -63,7 +63,7 @@ def consulta():
                 continue
             df = pd.read_csv(z.open(nm), sep=";", encoding="latin-1", dtype=str)
             df.columns = [c.strip().upper() for c in df.columns]
-            for cargo in (3, 5, 6, 7):
+            for cargo in (3, 5, 6, 7, 8):
                 d = df[df["CD_CARGO"].astype(str) == str(cargo)]
                 if d.empty:
                     continue

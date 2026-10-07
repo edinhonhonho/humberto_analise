@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_AL_governador"]=[[45,"Jhc",892484,1],[15,"Renan Filho",809796,1],[80,"Lenilda Luna",6454,1],[35,"Márcio Jambo",880,1]];

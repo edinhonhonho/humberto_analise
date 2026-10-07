@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_ES_governador"]=[[10,"Lorenzo Pazolini",1048633,1],[15,"Ricardo Ferraço",719397,1],[13,"Helder Salomão",323483,1],[14,"Breno Barcelos",17988,1],[80,"Rafael Demuner",2670,1]];

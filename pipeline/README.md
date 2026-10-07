@@ -158,3 +158,18 @@ Para os nomes dos candidatos de cada cargo, rode antes o `baixar_rs_completo.py`
 `python servir.py` abre o site em http://localhost:8000. Em `config.json`, `"ufs"` lista as UFs
 (cada uma precisa de `votacao_secao_ANO_UF.csv` e `UF_Municipios_*.shp`, que o `baixar_rs_completo.py`
 baixa) e `"destaques"` define os candidatos dos cards com foto, analisados sempre com o rigor completo.
+
+## Análise nacional (esquerda, todas as UFs)
+
+    python rodar_brasil.py --plano     # quantos candidatos entram e quanto tempo leva
+    python rodar_brasil.py             # roda tudo, em paralelo, retomável (Ctrl+C e rodar de novo continua)
+
+Veja o cabeçalho de `rodar_brasil.py` para as opções (`--paralelas`, `--so=`, `--cargos=`, `--espectros`).
+
+## Site com análise calculada no navegador (sem páginas pré-calculadas)
+
+    python converter_parquet.py --uf todas      # CSV de votação -> Parquet por UF (dados_web/); uns 10 s por UF
+    python montar_site_web.py --servir          # monta ../site e abre em http://localhost:8000
+
+O navegador lê os Parquet da UF (só o trecho do candidato escolhido) e calcula a análise em etapas num Web Worker.
+Qualquer candidato de qualquer cargo e UF abre sem rodar o pipeline em Python. Código do motor em motor_src/.

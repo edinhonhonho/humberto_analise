@@ -1,0 +1,29 @@
+[
+ {
+  "slug": "humberto-matos",
+  "nome": "Humberto Matos",
+  "ano": 2022,
+  "uf": "RS",
+  "cargo": 7,
+  "numero": 65065,
+  "foto": "fotos/humberto-matos.webp"
+ },
+ {
+  "slug": "jones-manoel",
+  "nome": "Jones Manoel",
+  "ano": 2022,
+  "uf": "PE",
+  "cargo": 6,
+  "numero": 5050,
+  "foto": "fotos/jones-manoel.webp"
+ },
+ {
+  "slug": "elias-jabbour",
+  "nome": "Elias Jabbour",
+  "ano": 2022,
+  "uf": "RJ",
+  "cargo": 6,
+  "numero": 6577,
+  "foto": "fotos/elias-jabbour.webp"
+ }
+]

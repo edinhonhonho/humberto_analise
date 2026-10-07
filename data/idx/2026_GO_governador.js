@@ -1,0 +1,1 @@
+(window.__IDX=window.__IDX||{})["2026_GO_governador"]=[[15,"Daniel Vilela",2148218,1],[22,"Wilder Morais",797141,1],[13,"Luis Cesar Bueno",356692,1],[45,"Marconi Perillo",315676,1],[80,"Luciana Amorim",11632,1],[29,"Danilo da Silva",1217,1]];
