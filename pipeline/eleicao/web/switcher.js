@@ -12,7 +12,7 @@ const pan=mk('div','swp');pan.hidden=true;bar.appendChild(btn);nav.appendChild(p
 let uf=null,cargo=null,M=null,mostrar=10;const cache={};
 const uniq=a=>[...new Set(a)];
 const ttl=mk('h2','swt','Trocar candidato');
-const aviso=mk('p','swa','Qualquer candidato da lista: a análise é calculada na hora, ao abrir.');
+const aviso=mk('p','swa','A análise é feita apenas para candidatos de partidos de esquerda. Ela é calculada na hora, ao abrir.');
 const gu=mk('div','swgrp'),gc=mk('div','swgrp');
 const qw=mk('div','swq'),q=mk('input');q.type='search';q.placeholder='Buscar por nome ou número';q.autocomplete='off';q.setAttribute('aria-label','Buscar candidato');qw.appendChild(q);
 const sem=mk('label','swchk');const ck=mk('input');ck.type='checkbox';sem.hidden=true;
@@ -55,7 +55,7 @@ async function lista(){const g=GR().find(g=>g.uf===uf&&g.cargo===cargo);ul.repla
  const k=g.ano+'_'+g.uf+'_'+g.cargo_slug;
  if(!cache[k]){try{await load(root+'data/idx/'+k+'.js?'+Date.now());cache[k]=(window.__IDX||{})[k]||[]}catch(_){cache[k]=[]}}
  const t=norm(q.value.trim()),todos=ck.checked,P=(M.partidos||{});
- const sig=n=>{let s=String(n);const d=s.length;const p=d>=2?s.slice(0,2):s;return P[p]||''};const dir=n=>((M.espectro||{})[String(n).slice(0,2)])==='direita';
+ const sig=n=>{let s=String(n);const d=s.length;const p=d>=2?s.slice(0,2):s;return P[p]||''};const dir=n=>((M.espectro||{})[String(n).slice(0,2)])!=='esquerda';
  const rows=cache[k].filter(r=>!dir(r[0])).filter(r=>!t||norm(r[1]).includes(t)||String(r[0]).startsWith(t));
  
  info.textContent=t?rows.length+' resultado(s)':rows.length.toLocaleString('pt-BR')+' candidatos';
